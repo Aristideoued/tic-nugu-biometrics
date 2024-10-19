@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	package="com.neurotec.tutorials.media"
+	android:versionName="13.1.0.0"
+	android:versionCode="0">
+
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.CAMERA"/>
+	<uses-permission android:name="android.permission.RECORD_AUDIO"/>
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+	<uses-permission android:name="android.permission.WRITE_SETTINGS"
+		android:maxSdkVersion="22"/>
+
+
+	<uses-feature
+		android:name="android.hardware.microphone"
+		android:required="false" />
+
+	<application
+		android:extractNativeLibs="true"
+		tools:replace="android:name"
+		android:name="MediaTutorialsApp"
+		android:icon="@drawable/ic_neurotechnology_logo"
+		android:label="@string/app_name"
+		android:theme="@android:style/Theme.Holo.Light"
+		android:requestLegacyExternalStorage="true">
+		<activity android:name=".MediaTutorials" >
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+		<activity android:name="com.neurotec.samples.app.DirectoryViewer" >
+		</activity>
+		<activity
+			android:name=".CreateWSQ"
+			android:label="Create WSQ" >
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+
+				<category android:name="com.neurotec.tutorials.media.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".WSQToNImage"
+			android:label="WSQ To NImage" >
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+
+				<category android:name="com.neurotec.tutorials.media.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ShowImageInfo"
+			android:label="Show Image Info" >
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+
+				<category android:name="com.neurotec.tutorials.media.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ReadAudio"
+			android:label="Read Audio" >
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+
+				<category android:name="com.neurotec.tutorials.media.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ReadVideo"
+			android:label="Read Video" >
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+
+				<category android:name="com.neurotec.tutorials.media.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+
+		<!-- Licensing -->
+		<activity
+			android:name="com.neurotec.licensing.gui.ActivationActivity"
+			android:theme="@android:style/Theme.Holo.Light"/>
+
+	</application>
+
+</manifest>

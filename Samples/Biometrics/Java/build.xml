@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ====================================================================== -->
+<!-- Ant build file (http://ant.apache.org/) for Ant 1.6.2 or above.        -->
+<!-- ====================================================================== -->
+
+<project name="biometric-sample" default="package" basedir=".">
+
+	<!-- ====================================================================== -->
+	<!-- Build environment properties                                           -->
+	<!-- ====================================================================== -->
+
+	<property name="utils.dir" value="../../Common/Java/utils"/>
+	<property name="abis-sample.dir" value="abis-sample"/>
+	
+	<!-- ====================================================================== -->
+	<!-- Cleaning up target                                                     -->
+	<!-- ====================================================================== -->
+
+	<target name="clean" description="Clean all biometrics samples">
+		<ant dir="${utils.dir}" target="clean" inheritAll="false" />
+		<ant dir="${abis-sample.dir}" target="clean" inheritAll="false" />
+	</target>
+
+	<!-- ====================================================================== -->
+	<!-- Package target                                                         -->
+	<!-- ====================================================================== -->
+
+	<target name="package" description="Package the application">
+		<ant dir="${utils.dir}" target="package" inheritAll="false" />
+		<ant dir="${abis-sample.dir}" target="package" inheritAll="false" />
+	</target>
+</project>

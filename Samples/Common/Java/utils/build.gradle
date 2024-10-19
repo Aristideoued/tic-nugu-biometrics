@@ -1,0 +1,11 @@
+description = "Samples utils"
+
+apply from: "../buildCommon/common.gradle"
+
+dependencies {
+	implementation ":neurotec-core"
+	implementation ":neurotec-licensing"
+	implementation ":jna"
+	implementation project.modules."commons-io"
+	implementation project.modules."flatlaf"
+}

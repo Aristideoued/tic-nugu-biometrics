@@ -1,0 +1,128 @@
+description = "Biometric Standards Tutorials Android"
+
+apply plugin: 'com.android.application'
+
+def productRootDir = "../../../.."
+def productBinDir = new File(productRootDir, "Bin")
+def productBinAndroidDir = new File(productBinDir, "Android")
+def productLibAndroidDir = new File(productRootDir, "Lib/Android")
+if (project.hasProperty("nativeLibraryPath")) {
+	productLibAndroidDir = new File(project.getProperty("nativeLibraryPath"))
+}
+def archUsed = "arm64-v8a,armeabi-v7a,x86"
+def archivesBaseName = "biometric-standards-tutorials"
+
+def usedNdfList = ["FacesDetectSegmentsAttributes.ndf",
+					"FacesDetectSegmentsOrientation.ndf",
+					"FacesDetectSegmentsFeaturePointsTrack.ndf",
+					"FacesDetectSegmentsLiveness.ndf",
+					"FacesCreateTemplateSmall.ndf",
+					"FacesCreateTemplateMedium.ndf",
+					"FacesDetect90Lite.ndf",
+					"FacesDetectSegmentsFeaturePointsDetect.ndf",
+					"FacesDetectSegmentsOrientation90.ndf",
+					"FacesCreateTemplateQuality.ndf",
+					"Irises.ndf",
+					"Fingers.ndf",
+					"Voices.ndf"]
+
+buildscript {
+	System.properties['com.android.build.gradle.overrideVersionCheck'] = 'true'
+	repositories {
+		google()
+		jcenter()
+	}
+	dependencies {
+		classpath 'com.android.tools.build:gradle:4.1.2'
+	}
+}
+
+android {
+	compileSdkVersion 29
+
+	defaultConfig {
+		minSdkVersion 21
+		targetSdkVersion 26
+
+		ndk {
+			abiFilters 'x86', 'armeabi-v7a', 'arm64-v8a'
+		}
+	}
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+		targetCompatibility JavaVersion.VERSION_1_8
+	}
+	lintOptions {
+		abortOnError false
+	}
+}
+
+gradle.projectsEvaluated {
+	tasks.withType(JavaCompile) {
+		options.compilerArgs << "-Xlint:deprecation"
+	}
+}
+
+task deleteTemporaryFiles(type: Delete) {
+	if (project.hasProperty("ndfFiles")) {
+		for (String file : project.ndfFiles) {
+			delete "${android.sourceSets.main.assets.srcDirs[0]}/data/${file}.jet"
+		}
+	}
+	delete "${android.sourceSets.main.jniLibs.srcDirs[0]}"
+}
+
+clean {
+	delete fileTree(dir: productBinAndroidDir , include: "${archivesBaseName}*.*")
+}
+
+task prepareNdfFiles(type: Copy) {
+	from "${productBinDir}/Data"
+	includes = usedNdfList
+	rename { String fileName ->
+		fileName.replace('.ndf', '.ndf.jet')
+	}
+	into "${android.sourceSets.main.assets.srcDirs[0]}/data"
+}
+
+int counter = 1
+archUsed.split(',').each {
+	String srcDir = "${productLibAndroidDir}/${it}"
+	String dstDir = "${android.sourceSets.main.jniLibs.srcDirs[0]}/${it}"
+	task "prepareNativeLibs$counter"(type: Copy) {
+		from srcDir
+		exclude "**/*.Test.so"
+		exclude "**/*.IT.so"
+		into dstDir
+		dependsOn(prepareNdfFiles)
+	}
+	tasks.preBuild.dependsOn("prepareNativeLibs$counter")
+	counter++
+}
+
+task publishApk(type: Copy) {
+	from "${project.buildDir}/outputs/apk/debug"
+	include "${project.archivesBaseName}-debug.apk"
+	rename "${project.archivesBaseName}-debug.apk", "${archivesBaseName}.apk"
+	into productBinAndroidDir
+}
+
+clean.dependsOn(deleteTemporaryFiles)
+prepareNdfFiles.dependsOn(clean)
+build.finalizedBy(publishApk)
+
+dependencies {
+	implementation ":neurotec-media-processing-android"
+	implementation ":neurotec-biometrics-android"
+	implementation ":neurotec-biometrics-client-android"
+	implementation ":neurotec-devices-android"
+	implementation project(":tutorials-utils")
+}
+
+repositories {
+	google()
+	mavenCentral()
+	flatDir {
+		dirs "${productBinAndroidDir}/"
+	}
+}

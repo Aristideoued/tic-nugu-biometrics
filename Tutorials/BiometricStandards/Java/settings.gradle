@@ -1,0 +1,35 @@
+include \
+'antemplate-multi-modal', \
+'antemplate-to-nimage', \
+'antemplate-to-ntemplate', \
+'antemplate-type10-from-nimage', \
+'antemplate-type11-from-nsound-buffer', \
+'antemplate-type13-from-nimage', \
+'antemplate-type14-from-nimage', \
+'antemplate-type15-from-nimage', \
+'antemplate-type16-from-nimage', \
+'antemplate-type17-from-nimage', \
+'antemplate-type3-from-nimage', \
+'antemplate-type4-from-nimage', \
+'antemplate-type5-from-nimage', \
+'antemplate-type6-from-nimage', \
+'antemplate-type8-from-nimage', \
+'antemplate-type9-from-nimage', \
+'cbeff-record-to-ntemplate', \
+'complex-cbeff-record', \
+'fcrecord-from-nimage', \
+'fcrecord-to-ntemplate', \
+'firecord-from-nimage', \
+'firecord-to-ntemplate', \
+'fmrecord-to-ntemplate', \
+'fmcrecord-to-ntemplate', \
+'create-minex-compliant-template', \
+'iirecord-from-nimage', \
+'iirecord-to-ntemplate', \
+'ntemplate-to-antemplate', \
+'ntemplate-to-cbeff-record', \
+'ntemplate-to-fmrecord', \
+'ntemplate-to-fmcrecord', \
+'unpack-complex-cbeff-record', \
+'tutorials-utils';
+project(':tutorials-utils').projectDir = new File("../../Common/Java/utils");

@@ -1,0 +1,9 @@
+include \
+'adjust-grayscale-image', \
+'adjust-rgb-image', \
+'alpha-blend-rgb-image', \
+'invert-grayscale-image', \
+'invert-rgb-image', \
+'scale-grayscale-image', \
+'tutorials-utils';
+project(':tutorials-utils').projectDir = new File("../../Common/Java/utils");

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0">
+	<parent>
+		<artifactId>tutorials</artifactId>
+		<groupId>com.neurotec.tutorials</groupId>
+		<version>1.0</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>licensing-tutorials</artifactId>
+	<packaging>pom</packaging>
+	<name>${project.artifactId}</name>
+	<version>13.1.0.0</version>
+	<modules>
+		<module>/../../..</module>
+		<module>/../../Common/Java/utils</module>
+		<module>dongle-info</module>
+		<module>dongle-update</module>
+		<module>id-generation</module>
+		<module>license-activation</module>
+		<module>license-deactivation</module>
+		<module>license-info</module>
+	</modules>
+	<dependencies>
+		<dependency>
+			<groupId>net.java.dev.jna</groupId>
+			<artifactId>jna</artifactId>
+			<version>5.11.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neurotec.tutorials</groupId>
+			<artifactId>tutorials-utils</artifactId>
+			<version>13.1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neurotec</groupId>
+			<artifactId>neurotec-core</artifactId>
+			<version>13.1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.neurotec</groupId>
+			<artifactId>neurotec-licensing</artifactId>
+			<version>13.1.0.0</version>
+		</dependency>
+	</dependencies>
+	<properties>
+		<product.root.directory>${project.basedir}/../../../..</product.root.directory>
+	</properties>
+</project>

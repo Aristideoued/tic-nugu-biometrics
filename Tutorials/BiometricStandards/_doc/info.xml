@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<neu:sampleInfo xmlns:neu="http://www.neurotechnology.com/SampleExplorer">
+	<neu:title>Biometrics standards tutorials</neu:title>
+	<neu:description>
+		The following tutorials are provided:[br]
+		[b]ANTemplateType*FromNImage[/b] - demonstrates creation of ANTemplate records 3, 4, 5, 6, 8, 9, 10, 13, 14, 15, 16, 17 from image.[br]
+		[b]ANTemplate/FCRecord/FIRecord/FMRecord to NTemplate[/b] - demonstrates ANTemplate/FCRecord/FIRecord/FMRecord convertion to NTemplate.[br]
+		[b]ANTemplate to NImage[/b] - demonstrates how to save images stored in ANTemplate.[br]
+		[b]NTemplate from ANTemplate/FMRecord[/b] - demonstrates creation of FMRecord/ANTemplate from NTemplate.[br]
+		[b]FCRecord/FIRecord/IIRecord from image[/b] - demonstrates creation of FCRecord/FIRecord/IIRecord from image.[br]
+	</neu:description>
+	<neu:tag>C#</neu:tag>
+	<neu:tag>C</neu:tag>
+	<neu:tag>VB.NET</neu:tag>
+	<neu:tag>.NET</neu:tag>
+	<neu:tag>Java</neu:tag>
+	<neu:tag>Biometric standards</neu:tag>
+	<neu:tag>VeriLook Extended SDK</neu:tag>
+	<neu:tag>VeriFinger Extended SDK</neu:tag>
+	<neu:tag>VeriEye Extended SDK</neu:tag>
+	<neu:tag>VeriFinger BSS Addon</neu:tag>
+	<neu:tag>VeriLook BSS Addon</neu:tag>
+	<neu:tag>VeriEye BSS Addon</neu:tag>
+	<neu:tag>MegaMatcher Standard SDK</neu:tag>
+	<neu:tag>MegaMatcher Extended SDK</neu:tag>
+</neu:sampleInfo>

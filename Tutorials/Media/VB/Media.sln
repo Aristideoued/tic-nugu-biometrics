@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "CreateWsqVB", "CreateWsqVB\CreateWsqVB.vbproj", "{5EC30ECB-A70A-4D1E-BF68-83FEEE4C6D85}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ReadAudioFromDeviceVB", "ReadAudioFromDeviceVB\ReadAudioFromDeviceVB.vbproj", "{F1511CEE-CDCC-4A71-9866-AB977311BDCB}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ReadAudioVB", "ReadAudioVB\ReadAudioVB.vbproj", "{9CD8F482-9A21-4028-829D-7E27268C2F41}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ReadVideoFromDeviceVB", "ReadVideoFromDeviceVB\ReadVideoFromDeviceVB.vbproj", "{6012AFA7-CC77-484E-97BC-C07663F73ECD}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ReadVideoVB", "ReadVideoVB\ReadVideoVB.vbproj", "{0E41A6BB-1C25-4AF7-BB09-E5F3886DA193}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "ShowImageInfoVB", "ShowImageInfoVB\ShowImageInfoVB.vbproj", "{EC0EF07C-396F-47A4-94AE-837DCA297BEA}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "WsqToNImageVB", "WsqToNImageVB\WsqToNImageVB.vbproj", "{F5317549-A5BE-4C97-85C7-C44BE84B0AC7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug All|Win64_x64 = Debug All|Win64_x64
+		Release All|Win64_x64 = Release All|Win64_x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5EC30ECB-A70A-4D1E-BF68-83FEEE4C6D85}.Debug All|Win64_x64.ActiveCfg = Debug|x64
+		{5EC30ECB-A70A-4D1E-BF68-83FEEE4C6D85}.Debug All|Win64_x64.Build.0 = Debug|x64
+		{5EC30ECB-A70A-4D1E-BF68-83FEEE4C6D85}.Release All|Win64_x64.ActiveCfg = Release|x64
+		{5EC30ECB-A70A-4D1E-BF68-83FEEE4C6D85}.Release All|Win64_x64.Build.0 = Release|x64
+		{F1511CEE-CDCC-4A71-9866-AB977311BDCB}.Debug All|Win64_x64.ActiveCfg = Debug|x64
+		{F1511CEE-CDCC-4A71-9866-AB977311BDCB}.Debug All|Win64_x64.Build.0 = Debug|x64
+		{F1511CEE-CDCC-4A71-9866-AB977311BDCB}.Release All|Win64_x64.ActiveCfg = Release|x64
+		{F1511CEE-CDCC-4A71-9866-AB977311BDCB}.Release All|Win64_x64.Build.0 = Release|x64
+		{9CD8F482-9A21-4028-829D-7E27268C2F41}.Debug All|Win64_x64.ActiveCfg = Debug|x64
+		{9CD8F482-9A21-4028-829D-7E27268C2F41}.Debug All|Win64_x64.Build.0 = Debug|x64
+		{9CD8F482-9A21-4028-829D-7E27268C2F41}.Release All|Win64_x64.ActiveCfg = Release|x64
+		{9CD8F482-9A21-4028-829D-7E27268C2F41}.Release All|Win64_x64.Build.0 = Release|x64
+		{6012AFA7-CC77-484E-97BC-C07663F73ECD}.Debug All|Win64_x64.ActiveCfg = Debug|x64
+		{6012AFA7-CC77-484E-97BC-C07663F73ECD}.Debug All|Win64_x64.Build.0 = Debug|x64
+		{6012AFA7-CC77-484E-97BC-C07663F73ECD}.Release All|Win64_x64.ActiveCfg = Release|x64
+		{6012AFA7-CC77-484E-97BC-C07663F73ECD}.Release All|Win64_x64.Build.0 = Release|x64
+		{0E41A6BB-1C25-4AF7-BB09-E5F3886DA193}.Debug All|Win64_x64.ActiveCfg = Debug|x64
+		{0E41A6BB-1C25-4AF7-BB09-E5F3886DA193}.Debug All|Win64_x64.Build.0 = Debug|x64
+		{0E41A6BB-1C25-4AF7-BB09-E5F3886DA193}.Release All|Win64_x64.ActiveCfg = Release|x64
+		{0E41A6BB-1C25-4AF7-BB09-E5F3886DA193}.Release All|Win64_x64.Build.0 = Release|x64
+		{EC0EF07C-396F-47A4-94AE-837DCA297BEA}.Debug All|Win64_x64.ActiveCfg = Debug|x64
+		{EC0EF07C-396F-47A4-94AE-837DCA297BEA}.Debug All|Win64_x64.Build.0 = Debug|x64
+		{EC0EF07C-396F-47A4-94AE-837DCA297BEA}.Release All|Win64_x64.ActiveCfg = Release|x64
+		{EC0EF07C-396F-47A4-94AE-837DCA297BEA}.Release All|Win64_x64.Build.0 = Release|x64
+		{F5317549-A5BE-4C97-85C7-C44BE84B0AC7}.Debug All|Win64_x64.ActiveCfg = Debug|x64
+		{F5317549-A5BE-4C97-85C7-C44BE84B0AC7}.Debug All|Win64_x64.Build.0 = Debug|x64
+		{F5317549-A5BE-4C97-85C7-C44BE84B0AC7}.Release All|Win64_x64.ActiveCfg = Release|x64
+		{F5317549-A5BE-4C97-85C7-C44BE84B0AC7}.Release All|Win64_x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

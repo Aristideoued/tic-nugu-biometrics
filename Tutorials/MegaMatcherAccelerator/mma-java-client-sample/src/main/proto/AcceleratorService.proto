@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package Neurotec.MegaMatcherAccelerator.Protocol;
+option java_package = "com.neurotec.mma";
+option java_outer_classname = "MMAProto";
+option csharp_namespace = "Neurotec.MegaMatcherAccelerator";
+
+enum BiometricOperation {
+	NONE = 0;
+	ENROLL = 1;
+	DELETE = 2;
+	UPDATE = 3;
+	VERIFY = 6;
+	IDENTIFY = 7;
+}
+
+message AcceleratorTask {
+	message Parameter {
+		string name = 1;
+		oneof value {
+			string string_value = 2;
+			int64 int_value = 3;
+			uint64 uint_value = 4;
+			float float_value = 5;
+			double double_value = 6;
+		}
+	}
+	BiometricOperation operation = 3;
+	string subject_id = 4;
+	bytes template = 5;
+	repeated Parameter matching_params = 7;
+	string gallery_id = 8;
+	repeated Parameter biographic_data = 9;
+}
+
+message MinutiaeMatchingDetails {
+	int32 center_x = 1;
+	int32 center_y = 2;
+	float rotation = 3;
+	sint32 translation_x = 4;
+	sint32 translation_y = 5;
+
+	repeated int32 mated_minutiae_index_1 = 7;
+	repeated int32 mated_minutiae_index_2 = 8;
+
+	bool is_probably_mirror = 16;
+}
+
+message RecordMatchingDetails {
+	int32 score = 1;
+	sint32 matched_index = 2;
+	bool not_matched = 4;
+	MinutiaeMatchingDetails minutia_details = 3;
+}
+
+message ModalityMatchingDetails {
+	int32 score = 1;
+	repeated RecordMatchingDetails record_details = 2;
+}
+
+message MatchingDetails {
+	int32 score = 2;
+	ModalityMatchingDetails finger_details = 3;
+	ModalityMatchingDetails face_details = 4;
+	ModalityMatchingDetails iris_details = 5;
+	ModalityMatchingDetails palm_details = 6;
+	ModalityMatchingDetails voice_details = 7;
+}
+
+message AcceleratorResult {
+	message MatchingResult
+	{
+		fixed32 score = 1;
+		string subject_id = 2;
+		MatchingDetails matching_details = 4;
+	}
+	repeated MatchingResult matching_results = 2;
+}
+
+message GetSubjectCountRequest {
+	string gallery_id = 3;
+}
+
+message GetSubjectCountResponse {
+	int64 subject_count = 2;
+}
+
+message GetSubjectRequest {
+	string subject_id = 3;
+	string gallery_id = 4;
+}
+
+message GetSubjectResponse {
+	bytes packed_template = 2;
+}
+
+message ListIdsRequest {
+	int64 max_count = 3;
+	string continuation_token = 4;
+	string gallery_id = 5;
+}
+
+message ListIdsResponse {
+	repeated string ids = 1;
+	string continuation_token = 2;
+}
+
+service AcceleratorService {
+	rpc PerformTask(AcceleratorTask) returns (AcceleratorResult);
+	rpc GetSubjectCount(GetSubjectCountRequest) returns (GetSubjectCountResponse);
+	rpc GetSubject(GetSubjectRequest) returns (GetSubjectResponse);
+	rpc ListIdsPage(ListIdsRequest) returns (ListIdsResponse);
+}

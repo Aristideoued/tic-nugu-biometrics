@@ -1,0 +1,40 @@
+2024-10-18 12:55:03 Starting PG (revision: 13.1.20240905-d0e0ffb61375719308dd0399bba96b8dec34affd, mode: Single, trial)
+2024-10-18 12:55:03 Current UTC time: 12:55:03
+2024-10-18 12:55:03 PG started.
+2024-10-18 13:04:05 PG stopped.
+2024-10-18 13:07:59 Starting PG (revision: 13.1.20240905-d0e0ffb61375719308dd0399bba96b8dec34affd, mode: Server, trial)
+2024-10-18 13:07:59 Current UTC time: 13:07:59
+2024-10-18 13:07:59 PG started.
+2024-10-18 13:10:07 PG stopped.
+2024-10-18 13:10:08 Starting PG (revision: 13.1.20240905-d0e0ffb61375719308dd0399bba96b8dec34affd, mode: Server, trial)
+2024-10-18 13:10:08 Current UTC time: 13:10:08
+2024-10-18 13:10:08 PG started.
+2024-10-18 13:10:56 PG stopped.
+2024-10-18 13:14:25 Starting PG (revision: 13.1.20240905-d0e0ffb61375719308dd0399bba96b8dec34affd, mode: Gateway, trial)
+2024-10-18 13:14:25 Current UTC time: 13:14:25
+2024-10-18 13:14:25 Unable to start PG (0) !
+2024-10-18 13:15:00 Starting PG (revision: 13.1.20240905-d0e0ffb61375719308dd0399bba96b8dec34affd, mode: Gateway, trial)
+2024-10-18 13:15:00 Current UTC time: 13:15:00
+2024-10-18 13:15:00 Unable to start PG (0) !
+2024-10-18 13:15:46 Starting PG (revision: 13.1.20240905-d0e0ffb61375719308dd0399bba96b8dec34affd, mode: Single, trial)
+2024-10-18 13:15:46 Current UTC time: 13:15:46
+2024-10-18 13:15:46 PG started.
+2024-10-18 13:15:49 PG stopped.
+2024-10-18 13:15:53 Starting PG (revision: 13.1.20240905-d0e0ffb61375719308dd0399bba96b8dec34affd, mode: Single, trial)
+2024-10-18 13:15:53 Current UTC time: 13:15:53
+2024-10-18 13:15:53 PG started.
+2024-10-18 13:16:54 PG stopped.
+2024-10-18 13:16:55 Starting PG (revision: 13.1.20240905-d0e0ffb61375719308dd0399bba96b8dec34affd, mode: Single, trial)
+2024-10-18 13:16:55 Current UTC time: 13:16:55
+2024-10-18 13:16:55 PG started.
+2024-10-18 13:17:21 PG stopped.
+2024-10-18 13:30:53 Starting PG (revision: 13.1.20240905-d0e0ffb61375719308dd0399bba96b8dec34affd, mode: Single, trial)
+2024-10-18 13:30:53 Current UTC time: 13:30:53
+2024-10-18 13:30:53 PG started.
+2024-10-18 13:39:05 Unable to connect to Neurotechnology Trial/Internet Licensing server: (11001) No such host is known.
+2024-10-18 13:50:27 Connection to Neurotechnology Trial/Internet Licensing server restored.
+2024-10-18 14:05:58 PG stopped.
+2024-10-18 14:05:58 Starting PG (revision: 13.1.20240905-d0e0ffb61375719308dd0399bba96b8dec34affd, mode: Single, trial)
+2024-10-18 14:05:58 Current UTC time: 14:05:58
+2024-10-18 14:05:58 PG started.
+2024-10-18 14:07:18 PG stopped.

@@ -1,0 +1,7 @@
+include \
+'finger-scan', \
+'image-capture', \
+'iris-scan', \
+'sound-capture', \
+'tutorials-utils';
+project(':tutorials-utils').projectDir = new File("../../Common/Java/utils");

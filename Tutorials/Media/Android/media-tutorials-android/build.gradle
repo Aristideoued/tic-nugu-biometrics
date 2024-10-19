@@ -1,0 +1,109 @@
+description = "Media Tutorials Android"
+
+apply plugin: 'com.android.application'
+
+def productRootDir = "../../../.."
+def productBinDir = new File(productRootDir, "Bin")
+def productBinAndroidDir = new File(productBinDir, "Android")
+def productLibAndroidDir = new File(productRootDir, "Lib/Android")
+if (project.hasProperty("nativeLibraryPath")) {
+	productLibAndroidDir = new File(project.getProperty("nativeLibraryPath"))
+}
+def archUsed = "arm64-v8a,armeabi-v7a,x86"
+
+def archivesBaseName = "media-tutorials"
+
+def nativeLibsUsed = ["**/libjnidispatch.so",
+					  "**/libNCore.so",
+					  "**/libNGui.so",
+					  "**/libNLicensing.so",
+					  "**/libNService.so",
+					  "**/libNMedia.so",
+					  "**/libNMediaProc.so",
+					  "**/libgstreamer_android.so"]
+
+buildscript {
+	System.properties['com.android.build.gradle.overrideVersionCheck'] = 'true'
+	repositories {
+		google()
+		jcenter()
+	}
+	dependencies {
+		classpath 'com.android.tools.build:gradle:4.1.2'
+	}
+}
+
+android {
+	compileSdkVersion 29
+
+	defaultConfig {
+		minSdkVersion 21
+		targetSdkVersion 26
+
+		ndk {
+			abiFilters 'x86', 'armeabi-v7a', 'arm64-v8a'
+		}
+	}
+	compileOptions {
+		sourceCompatibility JavaVersion.VERSION_1_8
+		targetCompatibility JavaVersion.VERSION_1_8
+	}
+	lintOptions {
+		abortOnError false
+	}
+}
+
+gradle.projectsEvaluated {
+	tasks.withType(JavaCompile) {
+		options.compilerArgs << "-Xlint:deprecation"
+	}
+}
+
+task deleteTemporaryFiles(type: Delete) {
+	delete "${android.sourceSets.main.jniLibs.srcDirs[0]}"
+}
+
+clean {
+	delete fileTree(dir: productBinAndroidDir , include: "${archivesBaseName}*.*")
+}
+
+int counter = 1
+archUsed.split(',').each {
+	String srcDir = "${productLibAndroidDir}/${it}"
+	String dstDir = "${android.sourceSets.main.jniLibs.srcDirs[0]}/${it}"
+	task "prepareNativeLibs$counter"(type: Copy) {
+		from srcDir
+		for (String lib : nativeLibsUsed) {
+			include lib
+		}
+		into dstDir
+		dependsOn(clean)
+	}
+	tasks.preBuild.dependsOn("prepareNativeLibs$counter")
+	counter++
+}
+
+task publishApk(type: Copy) {
+	from "${project.buildDir}/outputs/apk/debug"
+	include "${project.archivesBaseName}-debug.apk"
+	rename "${project.archivesBaseName}-debug.apk", "${archivesBaseName}.apk"
+	into productBinAndroidDir
+}
+
+clean.dependsOn(deleteTemporaryFiles)
+build.finalizedBy(publishApk)
+
+dependencies {
+	implementation ":neurotec-gui-android"
+	implementation ":neurotec-media-processing-android"
+	implementation ":neurotec-devices-media-android"
+	implementation project(":tutorials-utils")
+}
+
+repositories {
+	google()
+	mavenCentral()
+	flatDir {
+		dirs "${productBinAndroidDir}/"
+	}
+}

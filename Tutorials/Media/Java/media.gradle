@@ -1,0 +1,18 @@
+project.description = project.name
+
+apply plugin: 'application'
+apply from: "../../../../Samples/Common/Java/buildCommon/common.gradle"
+mainClassName = "com.neurotec.tutorials." + artifactNameToUpperCamelCase(project.name)
+group = "com.neurotec.tutorials"
+tasks.prepareResources.setEnabled(false)
+tasks.copyScripts.setEnabled(false)
+
+dependencies {
+	implementation ":neurotec-core"
+	implementation ":neurotec-licensing"
+	implementation ":neurotec-media"
+	implementation ":jna"
+	implementation project(":tutorials-utils")
+}
+
+apply from: "../../../../Samples/Common/Java/buildCommon/run.gradle"

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<neu:sampleInfo xmlns:neu="http://www.neurotechnology.com/SampleExplorer">
+	<neu:title>Media tutorials</neu:title>
+	<neu:description>
+		Media tutorials explains usage of Neurotechnology Media library API.[br]
+		The following tutorials are provided:[br]
+		[b]CreateWsq[/b] - demonstrates WSQ format image creation from another image.[br]
+		[b]ReadAudioFromDevice[/b] - demonstrates capturing sound from device.[br]
+		[b]ReadAudio[/b] - demonstrates reading sound from specified filename or url.[br]
+		[b]ReadVideoFromDevice[/b] - demonstrates capturing frames from device.[br]
+		[b]ReadVideo[/b] - demonstrates reading frames from specified filename or url.[br]
+		[b]ShowImageInfo[/b] - displays information about an image.[br]
+		[b]WsqToNImage[/b] - demonstrates WSQ to NImage conversion.[br]
+	</neu:description>
+	<neu:tag>C#</neu:tag>
+	<neu:tag>C</neu:tag>
+	<neu:tag>VB.NET</neu:tag>
+	<neu:tag>.NET</neu:tag>
+	<neu:tag>Java</neu:tag>
+	<neu:tag>Video</neu:tag>
+	<neu:tag>Audio</neu:tag>
+	<neu:tag>File</neu:tag>
+	<neu:tag>Url</neu:tag>
+	<neu:tag>Device</neu:tag>
+	<neu:tag>VeriFinger Standard SDK</neu:tag>
+	<neu:tag>VeriLook Standard SDK</neu:tag>
+	<neu:tag>VeriEye Standard SDK</neu:tag>
+	<neu:tag>VeriSpeak Standard SDK</neu:tag>
+	<neu:tag>VeriLook Extended SDK</neu:tag>
+	<neu:tag>VeriFinger Extended SDK</neu:tag>
+	<neu:tag>VeriEye Extended SDK</neu:tag>
+	<neu:tag>VeriSpeak Extended SDK</neu:tag>
+	<neu:tag>MegaMatcher Standard SDK</neu:tag>
+	<neu:tag>MegaMatcher Extended SDK</neu:tag>
+</neu:sampleInfo>

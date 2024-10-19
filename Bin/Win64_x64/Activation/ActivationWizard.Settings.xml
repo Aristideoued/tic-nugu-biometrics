@@ -1,0 +1,5 @@
+<config>
+  <options>
+    <property name="Products" value="VeriFinger Standard SDK;VeriFinger Extended SDK;VeriSpeak Standard SDK;VeriSpeak Extended SDK;" type="str" />
+  </options>
+</config>

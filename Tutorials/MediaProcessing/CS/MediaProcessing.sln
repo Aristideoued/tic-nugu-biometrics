@@ -1,0 +1,52 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdjustGrayscaleImageCS", "AdjustGrayscaleImageCS\AdjustGrayscaleImageCS.csproj", "{651A127D-F372-49F4-87B5-ABC5AEB907DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AdjustRgbImageCS", "AdjustRgbImageCS\AdjustRgbImageCS.csproj", "{20C00532-A3D2-47D3-8EBA-CDE20F98FE1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlphaBlendRgbImageCS", "AlphaBlendRgbImageCS\AlphaBlendRgbImageCS.csproj", "{7039BD96-6D79-4061-A4AF-174C78F58E4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvertGrayscaleImageCS", "InvertGrayscaleImageCS\InvertGrayscaleImageCS.csproj", "{26B4AFB4-0675-4EBD-AEE7-156F94322B3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvertRgbImageCS", "InvertRgbImageCS\InvertRgbImageCS.csproj", "{E977915F-053F-489C-B106-2AEFC4DD51A8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScaleGrayscaleImageCS", "ScaleGrayscaleImageCS\ScaleGrayscaleImageCS.csproj", "{63B3C3BB-675F-470F-BE11-81D35F04CD1D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win64_x64 = Debug|Win64_x64
+		Release|Win64_x64 = Release|Win64_x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{651A127D-F372-49F4-87B5-ABC5AEB907DD}.Debug|Win64_x64.ActiveCfg = Debug|x64
+		{651A127D-F372-49F4-87B5-ABC5AEB907DD}.Debug|Win64_x64.Build.0 = Debug|x64
+		{651A127D-F372-49F4-87B5-ABC5AEB907DD}.Release|Win64_x64.ActiveCfg = Release|x64
+		{651A127D-F372-49F4-87B5-ABC5AEB907DD}.Release|Win64_x64.Build.0 = Release|x64
+		{20C00532-A3D2-47D3-8EBA-CDE20F98FE1F}.Debug|Win64_x64.ActiveCfg = Debug|x64
+		{20C00532-A3D2-47D3-8EBA-CDE20F98FE1F}.Debug|Win64_x64.Build.0 = Debug|x64
+		{20C00532-A3D2-47D3-8EBA-CDE20F98FE1F}.Release|Win64_x64.ActiveCfg = Release|x64
+		{20C00532-A3D2-47D3-8EBA-CDE20F98FE1F}.Release|Win64_x64.Build.0 = Release|x64
+		{7039BD96-6D79-4061-A4AF-174C78F58E4F}.Debug|Win64_x64.ActiveCfg = Debug|x64
+		{7039BD96-6D79-4061-A4AF-174C78F58E4F}.Debug|Win64_x64.Build.0 = Debug|x64
+		{7039BD96-6D79-4061-A4AF-174C78F58E4F}.Release|Win64_x64.ActiveCfg = Release|x64
+		{7039BD96-6D79-4061-A4AF-174C78F58E4F}.Release|Win64_x64.Build.0 = Release|x64
+		{26B4AFB4-0675-4EBD-AEE7-156F94322B3D}.Debug|Win64_x64.ActiveCfg = Debug|x64
+		{26B4AFB4-0675-4EBD-AEE7-156F94322B3D}.Debug|Win64_x64.Build.0 = Debug|x64
+		{26B4AFB4-0675-4EBD-AEE7-156F94322B3D}.Release|Win64_x64.ActiveCfg = Release|x64
+		{26B4AFB4-0675-4EBD-AEE7-156F94322B3D}.Release|Win64_x64.Build.0 = Release|x64
+		{E977915F-053F-489C-B106-2AEFC4DD51A8}.Debug|Win64_x64.ActiveCfg = Debug|x64
+		{E977915F-053F-489C-B106-2AEFC4DD51A8}.Debug|Win64_x64.Build.0 = Debug|x64
+		{E977915F-053F-489C-B106-2AEFC4DD51A8}.Release|Win64_x64.ActiveCfg = Release|x64
+		{E977915F-053F-489C-B106-2AEFC4DD51A8}.Release|Win64_x64.Build.0 = Release|x64
+		{63B3C3BB-675F-470F-BE11-81D35F04CD1D}.Debug|Win64_x64.ActiveCfg = Debug|x64
+		{63B3C3BB-675F-470F-BE11-81D35F04CD1D}.Debug|Win64_x64.Build.0 = Debug|x64
+		{63B3C3BB-675F-470F-BE11-81D35F04CD1D}.Release|Win64_x64.ActiveCfg = Release|x64
+		{63B3C3BB-675F-470F-BE11-81D35F04CD1D}.Release|Win64_x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

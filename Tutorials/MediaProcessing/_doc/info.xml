@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<neu:sampleInfo xmlns:neu="http://www.neurotechnology.com/SampleExplorer">
+	<neu:title>Media Processing tutorials</neu:title>
+	<neu:description>
+		Media processing tutorials explain usage of Neurotechnology Media Processing library API.[br]
+		The following tutorials are provided:[br]
+		[b]AdjustGrayscaleImage[/b] - demonstrates how to adjust brightness and contrast of grayscale image.[br]
+		[b]AdjustRgbImage[/b] - demonstrates how to adjust brightness and contrast of rgb image.[br]
+		[b]AlphaBlendRgbImage[/b] - demonstrates rgb image alpha blending.[br]
+		[b]InvertGrayscaleImage[/b] - demonstrates grayscale image invertion.[br]
+		[b]InvertRgbImage[/b] - demonstrates rgb image invertion.[br]
+		[b]ScaleGrayscaleImage[/b] - demonstrates grayscale image scaling.[br]
+	</neu:description>
+	<neu:tag>C#</neu:tag>
+	<neu:tag>C</neu:tag>
+	<neu:tag>VB.NET</neu:tag>
+	<neu:tag>.NET</neu:tag>
+	<neu:tag>.NET</neu:tag>
+	<neu:tag>Java</neu:tag>
+	<neu:tag>Image adjustment</neu:tag>
+	<neu:tag>VeriFinger Standard SDK</neu:tag>
+	<neu:tag>VeriLook Standard SDK</neu:tag>
+	<neu:tag>VeriEye Standard SDK</neu:tag>
+	<neu:tag>VeriSpeak Standard SDK</neu:tag>
+	<neu:tag>VeriLook Extended SDK</neu:tag>
+	<neu:tag>VeriFinger Extended SDK</neu:tag>
+	<neu:tag>VeriEye Extended SDK</neu:tag>
+	<neu:tag>VeriSpeak Extended SDK</neu:tag>
+	<neu:tag>MegaMatcher Standard SDK</neu:tag>
+	<neu:tag>MegaMatcher Extended SDK</neu:tag>
+</neu:sampleInfo>

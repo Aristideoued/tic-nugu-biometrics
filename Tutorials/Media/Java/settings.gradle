@@ -1,0 +1,10 @@
+include \
+'create-wsq', \
+'read-audio', \
+'read-audio-from-device', \
+'read-video', \
+'read-video-from-device', \
+'show-image-info', \
+'wsq-to-nimage', \
+'tutorials-utils';
+project(':tutorials-utils').projectDir = new File("../../Common/Java/utils");

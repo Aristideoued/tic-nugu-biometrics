@@ -1,0 +1,13 @@
+include \
+'abis-sample', \
+'enrollment-sample', \
+'latent-fingerprint-sample', \
+'server-sample', \
+'simple-faces-sample', \
+'simple-fingers-sample', \
+'simple-irises-sample', \
+'simple-voices-sample', \
+'tattoo-sample', \
+'template-conversion-sample', \
+'samples-utils';
+project(':samples-utils').projectDir = new File("../../Common/Java/utils")

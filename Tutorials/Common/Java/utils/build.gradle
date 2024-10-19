@@ -1,0 +1,11 @@
+description = "Tutorials utils"
+
+project.ext.baseScriptDir = new File(project.buildscript.sourceFile, "../../../../../Samples/Common/Java/buildCommon/");
+apply from: new File(project.baseScriptDir, "/common.gradle")
+
+dependencies {
+	implementation ":neurotec-core"
+	implementation ":neurotec-licensing"
+	implementation ":jna"
+	implementation project.modules."commons-io"
+}

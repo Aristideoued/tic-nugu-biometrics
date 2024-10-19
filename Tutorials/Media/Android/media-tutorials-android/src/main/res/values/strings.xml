@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- Common -->
+	<string name="app_name">Media Tutorials</string>
+	<string name="standard_iso">ISO</string>
+	<string name="standard_ansi">ANSI</string>
+
+	<!-- UI -->
+	<string name="convert">Convert</string>
+	<string name="get_info">Get Info</string>
+	<string name="read">Read</string>
+
+
+	<!-- Menu -->
+	<string name="menu_activation">Activation</string>
+
+	<!-- Messages -->
+	<string name="exception">Exception</string>
+
+</resources>

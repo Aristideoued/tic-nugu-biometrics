@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<neu:sampleInfo xmlns:neu="http://www.neurotechnology.com/SampleExplorer">
+	<neu:title>Device manager tutorials</neu:title>
+	<neu:description>
+		Device manager allows to capture biometric samples from various devices: fingerprint scanners,
+		video cameras, iris cameras and microphones. Tutorials demonstrate NDeviceManager library API can be used.
+	</neu:description>
+	<neu:tag>C#</neu:tag>
+	<neu:tag>C</neu:tag>
+	<neu:tag>Delphi</neu:tag>
+	<neu:tag>Pascal</neu:tag>
+	<neu:tag>VB.NET</neu:tag>
+	<neu:tag>.NET</neu:tag>
+	<neu:tag>Java</neu:tag>
+	<neu:tag>Fingerprint scanners</neu:tag>
+	<neu:tag>Cameras</neu:tag>
+	<neu:tag>Iris scanners</neu:tag>
+	<neu:tag>Microphones</neu:tag>
+	<neu:tag>VeriFinger Standard SDK</neu:tag>
+	<neu:tag>VeriLook Standard SDK</neu:tag>
+	<neu:tag>VeriEye Standard SDK</neu:tag>
+	<neu:tag>VeriSpeak Standard SDK</neu:tag>
+	<neu:tag>VeriLook Extended SDK</neu:tag>
+	<neu:tag>VeriFinger Extended SDK</neu:tag>
+	<neu:tag>VeriEye Extended SDK</neu:tag>
+	<neu:tag>VeriSpeak Extended SDK</neu:tag>
+	<neu:tag>MegaMatcher Standard SDK</neu:tag>
+	<neu:tag>MegaMatcher Extended SDK</neu:tag>
+</neu:sampleInfo>

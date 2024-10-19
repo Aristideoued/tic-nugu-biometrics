@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FingerScanCPP", "FingerScanCPP\FingerScanCPP.vcxproj", "{275E375E-47AA-416D-AF3C-B893A5665F4B}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ImageCaptureCPP", "ImageCaptureCPP\ImageCaptureCPP.vcxproj", "{801F4F25-14E8-4007-8897-8947AA6EBBAD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IrisScanCPP", "IrisScanCPP\IrisScanCPP.vcxproj", "{DB54645C-F865-4CB2-A829-DE52B9E0FE52}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SoundCaptureCPP", "SoundCaptureCPP\SoundCaptureCPP.vcxproj", "{921BDD36-76A8-4E22-AF80-CDF50BC1EC63}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug All|Win64_x64 = Debug All|Win64_x64
+		Release All|Win64_x64 = Release All|Win64_x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{275E375E-47AA-416D-AF3C-B893A5665F4B}.Debug All|Win64_x64.ActiveCfg = Debug|x64
+		{275E375E-47AA-416D-AF3C-B893A5665F4B}.Debug All|Win64_x64.Build.0 = Debug|x64
+		{275E375E-47AA-416D-AF3C-B893A5665F4B}.Release All|Win64_x64.ActiveCfg = Release|x64
+		{275E375E-47AA-416D-AF3C-B893A5665F4B}.Release All|Win64_x64.Build.0 = Release|x64
+		{801F4F25-14E8-4007-8897-8947AA6EBBAD}.Debug All|Win64_x64.ActiveCfg = Debug|x64
+		{801F4F25-14E8-4007-8897-8947AA6EBBAD}.Debug All|Win64_x64.Build.0 = Debug|x64
+		{801F4F25-14E8-4007-8897-8947AA6EBBAD}.Release All|Win64_x64.ActiveCfg = Release|x64
+		{801F4F25-14E8-4007-8897-8947AA6EBBAD}.Release All|Win64_x64.Build.0 = Release|x64
+		{DB54645C-F865-4CB2-A829-DE52B9E0FE52}.Debug All|Win64_x64.ActiveCfg = Debug|x64
+		{DB54645C-F865-4CB2-A829-DE52B9E0FE52}.Debug All|Win64_x64.Build.0 = Debug|x64
+		{DB54645C-F865-4CB2-A829-DE52B9E0FE52}.Release All|Win64_x64.ActiveCfg = Release|x64
+		{DB54645C-F865-4CB2-A829-DE52B9E0FE52}.Release All|Win64_x64.Build.0 = Release|x64
+		{921BDD36-76A8-4E22-AF80-CDF50BC1EC63}.Debug All|Win64_x64.ActiveCfg = Debug|x64
+		{921BDD36-76A8-4E22-AF80-CDF50BC1EC63}.Debug All|Win64_x64.Build.0 = Debug|x64
+		{921BDD36-76A8-4E22-AF80-CDF50BC1EC63}.Release All|Win64_x64.ActiveCfg = Release|x64
+		{921BDD36-76A8-4E22-AF80-CDF50BC1EC63}.Release All|Win64_x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

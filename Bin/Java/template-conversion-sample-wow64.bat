@@ -1,0 +1,1 @@
+%SystemRoot%\SysWOW64\javaw -Xss4m -jar template-conversion-sample.jar

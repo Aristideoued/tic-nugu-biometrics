@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+
+	<!-- Common -->
+	<string name="app_name">Biometric Standards Tutorials</string>
+	<string name="standard_iso">ISO</string>
+	<string name="standard_ansi">ANSI</string>
+
+	<!-- Licensing -->
+	<string name="msg_licenses_obtained">Licenses were obtained.</string>
+	<string name="msg_licenses_not_obtained">Licenses were NOT obtained.</string>
+	<string name="msg_obtaining_licenses">Obtaining licenses…</string>
+	<string name="format_obtaining_licenses">Obtaining licenses: %1$s</string>
+	<string name="format_not_activated">Not activated: %1$s</string>
+
+	<!-- GUI -->
+	<string name="msg_select_image">Select image</string>
+	<string name="msg_select_sound_file">Select sound file</string>
+	<string name="msg_select_ntemplate">Select NTemplate</string>
+	<string name="msg_select_antemplate">Select ANTemplate</string>
+	<string name="msg_select_fcrecord">Select FCRecord</string>
+	<string name="msg_select_firecord">Select FIRecord</string>
+	<string name="msg_select_fmrecord">Select FMRecord</string>
+	<string name="msg_select_iirecord">Select IIRecord</string>
+	<string name="msg_select_cbeffrecord">Select CBEFFRecord</string>
+	<string name="msg_select_complex_cbeffrecord">Select complex CBEFFRecord</string>
+	<string name="msg_create_complex_cbeffrecord">Create CBEFFRecord</string>
+	<string name="msg_select_fmrecord_nr1">"Select FMRecord No. 1"</string>
+	<string name="msg_select_fmrecord_nr2">"Select FMRecord No. 2"</string>
+	<string name="msg_add_record">"Add record"</string>
+	<string name="msg_record_list_empty">"Requres at least one record to create complex cbeff record."</string>
+	<string name="msg_select_finger_image">Select finger image</string>
+	<string name="msg_select_face_image">Select face image</string>
+	<string name="msg_select_iris_image">Select iris image</string>
+	<string name="msg_create_template">Create template</string>
+	<string name="msg_finger_image_selected">Finger image selected</string>
+	<string name="msg_face_image_selected">Face image selected</string>
+	<string name="msg_iris_image_selected">Iris image selected</string>
+	<string name="msg_finger_image_not_selected">Finger image is not selected</string>
+	<string name="msg_initialising">Initialising</string>
+	<string name="msg_licenses_partially_obtained">Not all licenses were obtained</string>
+	<string name="msg_no_licenses_obtained">Could not obtain any matching license</string>
+
+	<!-- MENU -->
+	<string name="menu_activation">Activation</string>
+
+	<!-- Messages -->
+	<string name="msg_one_or_more_fields_empty">One or more of the fields are empty.</string>
+	<string name="format_one_parameter_not_valid_integer">One of the parameters is not a valid integer: %1$s</string>
+	<string name="format_number_not_valid">Number not valid: %1$s</string>
+	<string name="format_version_not_valid">Version not valid: %1$s</string>
+	<string name="format_flag_not_valid">Flag not valid: %1$s</string>
+	<string name="msg_tot_length">Tot parameter should be 3 or 4 characters length.</string>
+	<string name="format_fingerprint_extraction_failed">Fingerprint extraction failed: %1$s</string>
+	<string name="format_unknown_standard">Unknown standard: %1$s</string>
+	<string name="msg_no_nfrecords_in_ntemplate">"There are no NFRecords in NTemplate."</string>
+	<string name="format_matching_complete">"Matching complete. Score: %1$d"</string>
+	<string name="format_antemplate_saved_to">"ANTemplate with type %1$d record saved to the selected directory."</string>
+	<string name="format_fmrecord_saved_to">FMRecord saved to the selected directory.</string>
+	<string name="format_converted_template_saved_to">Converted template saved to the selected directory.</string>
+	<string name="format_record_saved_to">Record sucessfully saved to the selected directory.</string>
+	<string name="format_template_conversion_failed">Template conversion failed. Status %1$s</string>
+	<string name="format_minex_compliant_template_saved_to">Minex compliant template saved to the selected directory.</string>
+	<string name="format_template_creation_failed_with_status">Template creation failed. Status: %1$s</string>
+	<string name="format_patron_format_not_valid">Patron format not valid: %1$s</string>
+	<string name="format_antemplate_multimodal_saved_to">ANTemplate multi modal saved to the selected directory.</string>
+	<string name="format_vertical_resolution_is_less">Vertical resolution is less than 250 (resolution %1$s), forcing 500 resolution.</string>
+	<string name="format_horizontal_resolution_is_less">Horizontal resolution is less than 250 (resolution %1$s), forcing 500 resolution.</string>
+	<string name="msg_unpacking">Unpacking…</string>
+
+	<!-- Hints -->
+	<string name="hint_tot">[Tot] - type of transaction</string>
+	<string name="hint_dai">[Dai] - destination agency identifier</string>
+	<string name="hint_ori">[Ori] - originating agency identifier</string>
+	<string name="hint_tcn">[Tcn] - transaction control number</string>
+	<string name="hint_src">[Src] - source agency number</string>
+	<string name="hint_udi">[Udi] - type of user-defined image</string>
+	<string name="hint_position">[Position] - NFPosition (integer)</string>
+	<string name="hint_patron_format">[Patron format] - patron format(integer)</string>
+	<string name="hint_impression_type">[Impression type] - NFImpressionType (integer)</string>
+	<string name="hint_open_images_number">Number of images to open</string>
+	<string name="hint_standard_iso_ansi">[Standard] - ISO or ANSI</string>
+	<string name="hint_fi_record_version">[Version] 1 - ANSI, 2.5 - ANSI, 1 - ISO, 2 - ISO</string>
+	<string name="hint_fm_record_version">[Version] 2 - ANSI, 3.5 - ANSI, 2 - ISO, 3 - ISO</string>
+	<string name="hint_fm_record_encoding">[Encoding] 0 - Traditional, 1 - XML</string>
+	<string name="hint_ii_record_version">[Version] 1 - ANSI, 1 - ISO, 2 - ISO</string>
+	<string name="hint_flag_use_neurotec_fields">[FlagUseNeurotecFields] - 1 if flag is used, 0 otherwise"</string>
+
+</resources>

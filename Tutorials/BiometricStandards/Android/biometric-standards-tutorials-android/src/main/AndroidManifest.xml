@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	package="com.neurotec.tutorials.biometricstandards"
+	android:versionName="13.1.0.0"
+	android:versionCode="0" >
+
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+	<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+	<uses-permission android:name="android.permission.WRITE_SETTINGS"
+		android:maxSdkVersion="22"/>
+
+
+	<application
+		android:extractNativeLibs="true"
+		tools:replace="android:name"
+		android:name="BiometricStandardsTutorialsApp"
+		android:label="@string/app_name"
+		android:icon="@com.neurotec.tutorials.biometricstandards:drawable/ic_neurotechnology_logo"
+		android:theme="@android:style/Theme.Holo.Light">
+
+		<activity
+			android:name=".BiometricStandardsTutorials"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="android.intent.category.DEFAULT" />
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name="com.neurotec.samples.app.DirectoryViewer"
+			android:screenOrientation="portrait">
+		</activity>
+		<activity
+			android:name=".ANTemplateMultiModal"
+			android:label="ANTemplate Multi Modal"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ANTemplateToNTemplate"
+			android:label="ANTemplate to NTemplate"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ANTemplateType2Record"
+			android:label="ANTemplate type 2 Record"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ANTemplateType3FromNImage"
+			android:label="ANTemplate type 3 from NImage"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ANTemplateType4FromNImage"
+			android:label="ANTemplate type 4 from NImage"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ANTemplateType5FromNImage"
+			android:label="ANTemplate type 5 from NImage"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ANTemplateType6FromNImage"
+			android:label="ANTemplate type 6 from NImage"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ANTemplateType8FromNImage"
+			android:label="ANTemplate type 8 from NImage"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ANTemplateType9FromNImage"
+			android:label="ANTemplate type 9 from NImage"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ANTemplateType10FromNImage"
+			android:label="ANTemplate type 10 from NImage"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ANTemplateType11FromNSoundBuffer"
+			android:label="ANTemplate type 11 from NSoundBuffer"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ANTemplateType13FromNImage"
+			android:label="ANTemplate type 13 from NImage"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ANTemplateType14FromNImage"
+			android:label="ANTemplate type 14 from NImage"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ANTemplateType15FromNImage"
+			android:label="ANTemplate type 15 from NImage"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ANTemplateType16FromNImage"
+			android:label="ANTemplate type 16 from NImage"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".ANTemplateType17FromNImage"
+			android:label="ANTemplate type 17 from NImage"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".NTemplateToANTemplate"
+			android:label="NTemplate to ANTemplate"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".FCRecordFromNImage"
+			android:label="FCRecord from NImage"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".FCRecordToNTemplate"
+			android:label="FCRecord to NTemplate"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".FIRecordToNTemplate"
+			android:label="FIRecord to NTemplate"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".FIRecordFromNImage"
+			android:label="FIRecord from NImage"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".FMRecordToNTemplate"
+			android:label="FMRecord to NTemplate"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".NTemplateToFMRecord"
+			android:label="NTemplate to FMRecord"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".IIRecordFromNImage"
+			android:label="IIRecord from NImage"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".IIRecordToNTemplate"
+			android:label="IIRecord to NTemplate"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".CBEFFRecordToNTemplate"
+			android:label="CBEFFRecord to NTemplate"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".NTemplateToCbeffRecord"
+			android:label="NTemplate to CbeffRecord"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+		<activity
+			android:name=".UnpackComplexCbeffRecord"
+			android:label="Unpack complex CbeffRecord"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+
+		<activity
+			android:name=".ComplexCBEFFRecord"
+			android:label="Complex CBEFFRecord"
+			android:screenOrientation="portrait">
+			<intent-filter>
+				<action android:name="android.intent.action.MAIN" />
+				<category android:name="com.neurotec.tutorials.biometricstandards.CATEGORY_NEUROTEC_TUTORIAL" />
+			</intent-filter>
+		</activity>
+
+		<!-- Licensing -->
+		<activity
+			android:name="com.neurotec.licensing.gui.ActivationActivity"
+			android:theme="@android:style/Theme.Holo.Light"/>
+
+	</application>
+</manifest>
