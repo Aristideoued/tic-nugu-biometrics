@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -43,6 +44,7 @@ public final class FingersViewToolBar extends JToolBar implements ActionListener
 	private MongoCollection<Document> fingerprintsCollection;
 
 
+
 	// ==============================================
 	// Public constructor
 	// ==============================================
@@ -74,6 +76,9 @@ public final class FingersViewToolBar extends JToolBar implements ActionListener
 		btnSaveRecord = new JButton("Save Record");
 		btnSaveRecord.setIcon(Utils.createIcon("images/Save.png"));
 		btnSaveRecord.addActionListener(this);
+
+
+
 
 		add(btnSaveImage);
 		add(btnSaveRecord);
@@ -111,33 +116,49 @@ public final class FingersViewToolBar extends JToolBar implements ActionListener
 	}
 
 
+	public void enregistrerToutesLesEmpreintes(List<NFinger> fingers) {
+		for (NFinger finger : fingers) {
+			NFRecord record = finger.getObjects().get(0).getTemplate();
+			String fingerPosition = Utilities.convertNFPositionNameToCamelCase(finger.getPosition());
+
+			System.out.println("Enregistrement de l'empreinte pour la position: " + fingerPosition);
+			System.out.println("Type d'impression: " + finger.getImpressionType().toString());
+
+			saveRecordToMongoDB(record, fingerPosition);
+		}
+		System.out.println("Toutes les empreintes ont été enregistrées avec succès.");
+	}
+
+
 
 	// Method to save fingerprint record to MongoDB
+
 	private void saveRecordToMongoDB(NFRecord record, String fingerPosition) {
-		// Convert the fingerprint record to a byte array and then to Base64 string
 		NBuffer buffer = record.save();
 		byte[] fingerprintData = buffer.toByteArray();
 		String fingerprintBase64 = Base64.getEncoder().encodeToString(fingerprintData);
 
-		System.out.println("Fingerprint data To SAVE: " + fingerprintBase64);
-
-		// Create a MongoDB document to represent the fingerprint
-
-
-
-
 		Document fingerprintDocument = new Document("fingerPosition", fingerPosition)
 				.append("fingerprintData", fingerprintBase64);
 
-		System.out.println("FingerprintDocument '" + fingerprintDocument );
-
-		// Insert the document into the MongoDB collection
 		fingerprintsCollection.insertOne(fingerprintDocument);
 		System.out.println("Fingerprint for position '" + fingerPosition + "' saved to MongoDB successfully.");
-
-		System.out.println("Fingerprint saved to MongoDB successfully.");
 	}
 
+	private void saveRecord() {
+		NFinger finger = (NFinger) getClientProperty("TAG");
+		if (finger != null) {
+			NFRecord record = finger.getObjects().get(0).getTemplate();
+			String fingerPosition = Utilities.convertNFPositionNameToCamelCase(finger.getPosition());
+
+			System.out.println("Saving fingerprint for finger position: " + fingerPosition);
+			System.out.println("Impression type: " + finger.getImpressionType().toString());
+
+			saveRecordToMongoDB(record, fingerPosition);
+		} else {
+			System.out.println("No fingerprint data available to save.");
+		}
+	}
 	/*private void saveRecord() {
 		NFinger finger = (NFinger) getClientProperty("TAG");
 		JFileChooser saveFileDialog = new JFileChooser();
@@ -162,7 +183,7 @@ public final class FingersViewToolBar extends JToolBar implements ActionListener
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 // Modified saveRecord method to save fingerprint in MongoDB
-private void saveRecord() {
+/*private void saveRecord() {
 	NFinger finger = (NFinger) getClientProperty("TAG");
 	if (finger != null) {
 		NFRecord record = finger.getObjects().get(0).getTemplate();
@@ -177,11 +198,18 @@ private void saveRecord() {
 	} else {
 		System.out.println("No fingerprint data available to save.");
 	}
-}
+}*/
 /////////////////////////////////////////////////////////////////////////////////////////////////
 	// ==============================================
 	// Public methods
 	// ==============================================
+
+
+	private List<NFinger> getAllFingers() {
+		// Cette méthode doit récupérer toutes les empreintes à partir du composant client
+		// Par exemple, cela peut être une liste de NFinger récupérée depuis une source spécifique
+		return (List<NFinger>) getClientProperty("TAG");
+	}
 
 	public void setSaveRecordVisible(boolean visible) {
 		btnSaveRecord.setVisible(visible);
@@ -196,5 +224,7 @@ private void saveRecord() {
 			saveRecord();
 		}
 	}
+
+
 
 }
