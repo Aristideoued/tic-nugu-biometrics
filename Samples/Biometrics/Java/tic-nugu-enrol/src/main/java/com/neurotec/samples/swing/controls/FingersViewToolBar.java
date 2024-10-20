@@ -4,11 +4,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Base64;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JToolBar;
 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import com.neurotec.biometrics.NFRecord;
 import com.neurotec.biometrics.NFinger;
 import com.neurotec.images.NImage;
@@ -16,9 +19,11 @@ import com.neurotec.images.NImageFormat;
 import com.neurotec.images.NImages;
 import com.neurotec.io.NBuffer;
 import com.neurotec.io.NFile;
+import com.neurotec.samples.Domain.MongoDBConnection;
 import com.neurotec.samples.Utilities;
 import com.neurotec.samples.enrollment.EnrollmentSettings;
 import com.neurotec.samples.util.Utils;
+import org.bson.Document;
 
 public final class FingersViewToolBar extends JToolBar implements ActionListener {
 
@@ -35,6 +40,8 @@ public final class FingersViewToolBar extends JToolBar implements ActionListener
 	private JButton btnSaveImage;
 	private JButton btnSaveRecord;
 	private final EnrollmentSettings settings = EnrollmentSettings.getInstance();
+	private MongoCollection<Document> fingerprintsCollection;
+
 
 	// ==============================================
 	// Public constructor
@@ -42,8 +49,17 @@ public final class FingersViewToolBar extends JToolBar implements ActionListener
 
 	public FingersViewToolBar() {
 		initializeComponents();
+		initializeMongoDB();  // Initialize MongoDB connection using MongoDBConnection
+
 	}
 
+	//////////////////////////////////Méthode d'initialisation de mongoBD/////////////////////////////////////////////
+
+	private void initializeMongoDB() {
+		// We use the MongoDBConnection class to get the MongoDB instance and the collection
+		MongoDatabase database = MongoDBConnection.getDatabase();
+		fingerprintsCollection = database.getCollection("fingerprints");
+	}
 	// ==============================================
 	// Private methods
 	// ==============================================
@@ -94,7 +110,35 @@ public final class FingersViewToolBar extends JToolBar implements ActionListener
 		}
 	}
 
-	private void saveRecord() {
+
+
+	// Method to save fingerprint record to MongoDB
+	private void saveRecordToMongoDB(NFRecord record, String fingerPosition) {
+		// Convert the fingerprint record to a byte array and then to Base64 string
+		NBuffer buffer = record.save();
+		byte[] fingerprintData = buffer.toByteArray();
+		String fingerprintBase64 = Base64.getEncoder().encodeToString(fingerprintData);
+
+		System.out.println("Fingerprint data To SAVE: " + fingerprintBase64);
+
+		// Create a MongoDB document to represent the fingerprint
+
+
+
+
+		Document fingerprintDocument = new Document("fingerPosition", fingerPosition)
+				.append("fingerprintData", fingerprintBase64);
+
+		System.out.println("FingerprintDocument '" + fingerprintDocument );
+
+		// Insert the document into the MongoDB collection
+		fingerprintsCollection.insertOne(fingerprintDocument);
+		System.out.println("Fingerprint for position '" + fingerPosition + "' saved to MongoDB successfully.");
+
+		System.out.println("Fingerprint saved to MongoDB successfully.");
+	}
+
+	/*private void saveRecord() {
 		NFinger finger = (NFinger) getClientProperty("TAG");
 		JFileChooser saveFileDialog = new JFileChooser();
 		if (finger != null) {
@@ -114,8 +158,27 @@ public final class FingersViewToolBar extends JToolBar implements ActionListener
 				}
 			}
 		}
-	}
+	}*/
 
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Modified saveRecord method to save fingerprint in MongoDB
+private void saveRecord() {
+	NFinger finger = (NFinger) getClientProperty("TAG");
+	if (finger != null) {
+		NFRecord record = finger.getObjects().get(0).getTemplate();
+		String fingerPosition = Utilities.convertNFPositionNameToCamelCase(finger.getPosition());
+
+		// Log the fingerprint information
+		System.out.println("Saving fingerprint for finger position: " + fingerPosition);
+		System.out.println("Impression type: " + finger.getImpressionType().toString());
+
+		// Save the fingerprint record to MongoDB
+		saveRecordToMongoDB(record, fingerPosition);
+	} else {
+		System.out.println("No fingerprint data available to save.");
+	}
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////
 	// ==============================================
 	// Public methods
 	// ==============================================

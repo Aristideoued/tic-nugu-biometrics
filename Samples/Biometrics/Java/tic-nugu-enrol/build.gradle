@@ -15,9 +15,12 @@ dependencies {
 	implementation ":neurotec-biometrics-gui"
 	implementation ":neurotec-devices"
 	implementation ":jna"
+	implementation "org.mongodb:mongodb-driver-sync:4.3.4"
 	implementation project.modules."simple-xml"
 	implementation project.modules."flatlaf"
 	implementation project(":samples-utils")
+	implementation 'org.slf4j:slf4j-api:2.0.9'
+	implementation 'org.slf4j:slf4j-simple:2.0.9'
 }
 
 apply from: "../../../Common/Java/buildCommon/run.gradle"
