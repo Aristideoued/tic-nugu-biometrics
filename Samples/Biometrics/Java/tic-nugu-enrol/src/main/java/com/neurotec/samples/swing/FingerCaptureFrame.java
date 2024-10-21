@@ -106,7 +106,7 @@ public final class FingerCaptureFrame extends JDialog implements ActionListener,
 					NBiometricStatus status = current.getStatus();
 					if (status == NBiometricStatus.OK) {
 						lstScanQueue.updateUI();
-						setStatus(new Color(0, 124, 0), Color.WHITE, "Create template completed successfully");
+						setStatus(new Color(0, 124, 0), Color.WHITE, "Création du modèle terminée avec succès");
 
 						System.out.println("<=======================Taille de la List des captures=========> "+subject.getTemplate().getFingers().getRecords().size());
 						subject.getTemplate().getFingers().getRecords().forEach(element -> {
