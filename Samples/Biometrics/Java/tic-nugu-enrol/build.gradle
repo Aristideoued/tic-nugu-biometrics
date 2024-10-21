@@ -17,6 +17,7 @@ dependencies {
 	implementation ":neurotec-biometrics-gui"
 	implementation ":neurotec-devices"
 	implementation ":jna"
+	implementation "org.mongodb:mongodb-driver-sync:4.3.4"
 	implementation project.modules."simple-xml"
 	implementation project.modules."flatlaf"
 	implementation project(":samples-utils")

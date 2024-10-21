@@ -1,15 +1,10 @@
 package com.neurotec.samples.swing.controls;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 
 import com.neurotec.biometrics.NFPosition;
 import com.neurotec.biometrics.swing.NFingerView;
@@ -81,12 +76,43 @@ public final class SlapsPanel extends JPanel {
 		gridBagUtils.addToGridBagLayout(1, 1, this, thumbScrollPane);
 		gridBagUtils.addToGridBagLayout(2, 1, this, rightScrollPane);
 
-	}
 
+
+		JButton saveAllButton = new JButton("Enregistrer toutes les empreintes");
+		saveAllButton.setPreferredSize(new Dimension(50, 40));  // Largeur 150, Hauteur 40
+
+		saveAllButton.setBackground(new Color(0, 128, 255));  // Bleu clair
+		saveAllButton.setForeground(Color.WHITE);  // Texte en blanc
+
+		// Créer des contraintes spécifiques pour le bouton
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 1;  // Colonne
+		gbc.gridy = 2;  // Ligne
+		gbc.gridwidth = 1;  // Largeur sur une colonne
+		gbc.gridheight = 1;  // Hauteur sur une ligne
+		gbc.anchor = GridBagConstraints.CENTER;  // Centre le bouton
+		gbc.fill = GridBagConstraints.HORIZONTAL;  // Le bouton s'étend horizontalement
+		gbc.weightx = 1.0;  // Permet au bouton de s'étendre horizontalement en fonction de l'espace disponible
+		gbc.insets = new Insets(10, 10, 10, 10);  // Marges autour du bouton
+
+		add(saveAllButton, gbc);  // Ajout du bouton avec les nouvelles contraintes
+
+		saveAllButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				saveAllFingerprints();
+			}
+		});
+		//gridBagUtils.addToGridBagLayout(1, 2, this, saveAllButton);
+	}
+	private void saveAllFingerprints() {}
 	// ==============================================
 	// Public methods
 	// ==============================================
+////////////////////////////Ajout de boutton EnregistrerTout/////////////////////////////////////
 
+
+//////////////////////////////////////////////////////////////////////////////////////////////
 	public NFingerView getView(NFPosition position) {
 		if (position == NFPosition.PLAIN_LEFT_FOUR_FINGERS) {
 			return nfvLeftFour;
