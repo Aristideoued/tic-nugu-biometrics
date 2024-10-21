@@ -76,6 +76,7 @@ public class Mongo {
             Document document = new Document("doigt", doigt)
                     .append("main", main)
                     .append("imageData", imageBytes)
+
                     .append("remoteId", "1");
 
             // Insérer le document dans la collection
@@ -123,6 +124,7 @@ public class Mongo {
                     .append("main", main)
                     .append("x", x)
                     .append("y", y)
+
                     .append("remoteId", "1");
 
             // Insérer le document dans la collection
