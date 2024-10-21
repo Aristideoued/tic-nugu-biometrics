@@ -5,6 +5,7 @@ apply from: "../../../Common/Java/buildCommon/common.gradle"
 mainClassName =  "com.neurotec.samples.EnrollmentSample";
 
 dependencies {
+	implementation 'org.postgresql:postgresql:42.6.0'
 	implementation 'org.mongodb:mongodb-driver-sync:4.9.1'
 	implementation ":neurotec-core"
 	implementation ":neurotec-licensing"
