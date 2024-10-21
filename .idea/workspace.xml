@@ -5,7 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e6fc6a40-57f8-4a31-812f-b531ce2c4b07" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Samples/Biometrics/Java/tic-nugu-enrol/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Samples/Biometrics/Java/tic-nugu-enrol/.idea/misc.xml" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/Resources/Logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Resources/Logo16x16.png" beforeDir="false" afterPath="$PROJECT_DIR$/Resources/Logo16x16.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Samples/Biometrics/Java/tic-nugu-enrol/src/main/java/com/neurotec/samples/swing/FingerCaptureFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/Samples/Biometrics/Java/tic-nugu-enrol/src/main/java/com/neurotec/samples/swing/FingerCaptureFrame.java" afterDir="false" />
+>>>>>>> 52e80f9584c3a95661a56f818e8d9c63d7b79e39
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,13 +58,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 8
+}]]></component>
   <component name="ProjectId" id="2nbsjYx0QjtU3mGxfqrZwe8d1Ab" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -68,7 +71,12 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/BIOMETRICS/FonctionPublic/tic-nugu-biometric/Samples/Biometrics/Java/enrollment-sample",
+<<<<<<< HEAD
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/BIOMETRICS/tic-nugu-biometrics/Samples/Biometrics/Java/tic-nugu-enrol",
+=======
+    "last_opened_file_path": "D:/BIOMETRICS/FonctionPublic/tic-nugu-biometrics/Samples/Biometrics/Java/tic-nugu-enrol",
+>>>>>>> 52e80f9584c3a95661a56f818e8d9c63d7b79e39
     "nodejs_package_manager_path": "npm"
   }
 }]]></component>
@@ -88,6 +96,7 @@
       <workItem from="1729331170699" duration="56000" />
       <workItem from="1729332624589" duration="2272000" />
       <workItem from="1729334921120" duration="687000" />
+      <workItem from="1729454131594" duration="60000" />
     </task>
     <servers />
   </component>

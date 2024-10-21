@@ -1,24 +1,21 @@
 package com.neurotec.samples.swing;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Frame;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.EnumSet;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.*;
 import java.util.List;
-import java.util.Vector;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
@@ -60,6 +57,7 @@ import com.neurotec.samples.enrollment.fingers.Scenario;
 import com.neurotec.samples.util.Utils;
 import com.neurotec.util.concurrent.CompletionHandler;
 
+
 public final class FingerCaptureFrame extends JDialog implements ActionListener, SegmentManipulationListener {
 
 	// ==============================================
@@ -98,7 +96,7 @@ public final class FingerCaptureFrame extends JDialog implements ActionListener,
 	}
 
 	private class TemplateCreationHandler implements CompletionHandler<NBiometricTask, Object> {
-
+      Mongo mg=new Mongo();
 		@Override
 		public void completed(final NBiometricTask result, final Object attachment) {
 			SwingUtilities.invokeLater(new Runnable() {
@@ -108,7 +106,92 @@ public final class FingerCaptureFrame extends JDialog implements ActionListener,
 					NBiometricStatus status = current.getStatus();
 					if (status == NBiometricStatus.OK) {
 						lstScanQueue.updateUI();
-						setStatus(new Color(0, 124, 0), Color.WHITE, "Create template completed successfully");
+						setStatus(new Color(0, 124, 0), Color.WHITE, "Création du modèle terminée avec succès");
+
+						//System.out.println("<=======================Taille de la List des captures=========> "+subject.getTemplate().getFingers().getRecords().size());
+						subject.getTemplate().getFingers().getRecords().forEach(element -> {
+							System.out.println("<=======================Nombre de munities par doigt="+element.getMinutiae().size());
+
+							for (int i=0;i<element.getMinutiae().size();i++){
+								mg.insertMunitieToMongoDB(element.getMinutiae().get(i).x,element.getMinutiae().get(i).y,element.getPosition().toString());
+
+							}
+
+						});
+						System.out.println("<=======================Nombre de doigt="+subject.getTemplate().getFingers().getRecords().size());
+
+						if(subject.getTemplate().getFingers().getRecords().size()==4 ){
+							for (int i=0;i<4;i++){
+								mg.insertMunitieToMongoDB(subject.getTemplate().getFingers().getRecords().get(i).getMinutiae().get(i).x,subject.getTemplate().getFingers().getRecords().get(i).getMinutiae().get(i).y,subject.getTemplate().getFingers().getRecords().get(i).getPosition().toString());
+
+							}
+
+							for (int i=3;i<subject.getFingers().size();i++){
+								System.out.println("<=======================Nom de doigt="+subject.getFingers().get(i).getPosition().toString());
+
+								if(subject.getFingers().get(i).getBinarizedImage(true)!=null){
+									try {
+										convertBase64ToPNG(convertToBase64(subject.getFingers().get(i).getImage().toImage(),"png"),subject.getFingers().get(i).getPosition().toString()+".png");
+									} catch (IOException e) {
+										throw new RuntimeException(e);
+									}
+									mg.insertImageToMongoDB(mg.convertToByteArray(mg.convert(convertToBase64(subject.getFingers().get(i).getImage().toImage(),"png"))),subject.getFingers().get(i).getPosition().toString());
+
+								}
+						}
+						}
+						else if(subject.getTemplate().getFingers().getRecords().size()==8){
+							for (int i=4;i<8;i++){
+								mg.insertMunitieToMongoDB(subject.getTemplate().getFingers().getRecords().get(i).getMinutiae().get(i).x,subject.getTemplate().getFingers().getRecords().get(i).getMinutiae().get(i).y,subject.getTemplate().getFingers().getRecords().get(i).getPosition().toString());
+
+							}
+							for (int i1=7;i1<subject.getFingers().size();i1++){
+								System.out.println("<=======================Nom de doigt="+subject.getFingers().get(i1).getPosition().toString());
+
+								if(subject.getFingers().get(i1).getBinarizedImage(true)!=null){
+									try {
+										convertBase64ToPNG(convertToBase64(subject.getFingers().get(i1).getImage().toImage(),"png"),subject.getFingers().get(i1).getPosition().toString()+".png");
+									} catch (IOException e) {
+										throw new RuntimeException(e);
+									}
+									mg.insertImageToMongoDB(mg.convertToByteArray(mg.convert(convertToBase64(subject.getFingers().get(i1).getImage().toImage(),"png"))),subject.getFingers().get(i1).getPosition().toString());
+
+								}
+						}
+						}
+						else if(subject.getTemplate().getFingers().getRecords().size()==10){
+							for (int i=8;i<10;i++){
+								mg.insertMunitieToMongoDB(subject.getTemplate().getFingers().getRecords().get(i).getMinutiae().get(i).x,subject.getTemplate().getFingers().getRecords().get(i).getMinutiae().get(i).y,subject.getTemplate().getFingers().getRecords().get(i).getPosition().toString());
+
+							}
+							for (int i2=11;i2<subject.getFingers().size();i2++){
+								if(subject.getFingers().get(i2).getBinarizedImage(true)!=null){
+									try {
+										convertBase64ToPNG(convertToBase64(subject.getFingers().get(i2).getImage().toImage(),"png"),subject.getFingers().get(i2).getPosition().toString()+".png");
+									} catch (IOException e) {
+										throw new RuntimeException(e);
+									}
+									mg.insertImageToMongoDB(mg.convertToByteArray(mg.convert(convertToBase64(subject.getFingers().get(i2).getImage().toImage(),"png"))),subject.getFingers().get(i2).getPosition().toString());
+
+								}}
+						}
+
+					/*	subject.getFingers().forEach(element -> {
+
+							if(element.getBinarizedImage(true)!=null){
+								try {
+								//	System.out.println("<=======================Doit concerné="+element.getPosition());
+
+									convertBase64ToPNG(convertToBase64(element.getImage().toImage(),"png"),element.getPosition().toString()+".png");
+									mg.insertImageToMongoDB(mg.convertToByteArray(mg.convert(convertToBase64(element.getImage().toImage(),"png"))),element.getPosition().toString());
+								} catch (Exception e) {
+									throw new RuntimeException(e);
+								}
+
+							}
+						});*/
+
+
 					} else {
 						setError("Create template failed, status: %s", status);
 					}
@@ -126,6 +209,37 @@ public final class FingerCaptureFrame extends JDialog implements ActionListener,
 				}
 			});
 
+		}
+
+		public  void convertBase64ToPNG(String base64String, String fileName) throws IOException {
+			// Retirer le préfixe si présent (par exemple, "data:image/png;base64,")
+			if (base64String.startsWith("data:image/png;base64,")) {
+				base64String = base64String.substring("data:image/png;base64,".length());
+			}
+
+			// Décoder la chaîne Base64
+			byte[] imageBytes = Base64.getDecoder().decode(base64String);
+
+			// Écrire les octets dans un fichier
+			try (FileOutputStream fos = new FileOutputStream(fileName)) {
+				fos.write(imageBytes);
+			}
+		}
+
+		public  String convertToBase64(Image img, String formatName) {
+			// Convert Image to BufferedImage
+			BufferedImage bufferedImage = new BufferedImage(img.getWidth(null), img.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+			bufferedImage.getGraphics().drawImage(img, 0, 0, null);
+
+			// Convert BufferedImage to Base64
+			try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+				ImageIO.write(bufferedImage, formatName, baos);
+				byte[] imageBytes = baos.toByteArray();
+				return Base64.getEncoder().encodeToString(imageBytes);
+			} catch (IOException e) {
+				e.printStackTrace();
+				return null;
+			}
 		}
 
 		@Override
@@ -753,6 +867,12 @@ public final class FingerCaptureFrame extends JDialog implements ActionListener,
 	public void setSubject(NSubject subject) {
 		this.subject = subject;
 
+	}
+	
+	public  void showList(){
+		captureList.forEach(element -> {
+			System.out.println("<======================================List de capture================> "+element.getBinarizedImage());
+		});
 	}
 
 	@Override
