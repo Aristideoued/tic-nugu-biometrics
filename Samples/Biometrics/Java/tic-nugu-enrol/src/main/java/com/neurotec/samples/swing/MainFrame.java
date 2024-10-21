@@ -461,6 +461,14 @@ public final class MainFrame extends JFrame implements ActionListener {
 				Utilities.showWarning(this, "Aucun doigt selectionné...");
 				return;
 			}
+			else{
+				Missing mss=new Missing();
+				int nb=model.getSubject().getMissingFingers().size();
+				mss.setMissingSize(nb);
+
+				System.out.println( "Nombre de doigts manquants: "+mss.getMissingSize());
+
+			}
 		}
 		newSubject = false;
 		enableControls(false);
@@ -503,6 +511,8 @@ public final class MainFrame extends JFrame implements ActionListener {
 	}
 
 	private void startNewEnrollment() {
+
+
 		if (!Utilities.showQuestion(this, "Toutes les images et les enregistrements seront effacés. Etes-vous sure ?")) {
 			return;
 		}

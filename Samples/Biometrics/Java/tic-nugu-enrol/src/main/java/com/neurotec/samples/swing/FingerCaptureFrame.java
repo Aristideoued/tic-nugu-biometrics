@@ -118,7 +118,9 @@ public final class FingerCaptureFrame extends JDialog implements ActionListener,
 							}
 
 						});
-						System.out.println("<=======================Nombre de doigt="+subject.getTemplate().getFingers().getRecords().size());
+						System.out.println("<=======================Nombre de templates="+subject.getTemplate().getFingers().getRecords().size());
+						//subject.getFingers().getOwner().
+						System.out.println("<=======================Nombre de fingers="+subject.getFingers().size());
 
 						if(subject.getTemplate().getFingers().getRecords().size()==4 ){
 							for (int i=0;i<4;i++){
