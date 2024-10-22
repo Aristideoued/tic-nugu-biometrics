@@ -109,7 +109,7 @@ public final class FingerCaptureFrame extends JDialog implements ActionListener,
 						setStatus(new Color(0, 124, 0), Color.WHITE, "Création du modèle terminée avec succès");
 
 						//System.out.println("<=======================Taille de la List des captures=========> "+subject.getTemplate().getFingers().getRecords().size());
-						subject.getTemplate().getFingers().getRecords().forEach(element -> {
+						/*subject.getTemplate().getFingers().getRecords().forEach(element -> {
 							System.out.println("<=======================Nombre de munities par doigt="+element.getMinutiae().size());
 
 							for (int i=0;i<element.getMinutiae().size();i++){
@@ -117,10 +117,10 @@ public final class FingerCaptureFrame extends JDialog implements ActionListener,
 
 							}
 
-						});
-						System.out.println("<=======================Nombre de doigt="+subject.getTemplate().getFingers().getRecords().size());
+						});*/
 
-						if(subject.getTemplate().getFingers().getRecords().size()==4 ){
+
+					/*	if(subject.getTemplate().getFingers().getRecords().size()==4 ){
 							for (int i=0;i<4;i++){
 								mg.insertMunitieToMongoDB(subject.getTemplate().getFingers().getRecords().get(i).getMinutiae().get(i).x,subject.getTemplate().getFingers().getRecords().get(i).getMinutiae().get(i).y,subject.getTemplate().getFingers().getRecords().get(i).getPosition().toString());
 
@@ -174,7 +174,7 @@ public final class FingerCaptureFrame extends JDialog implements ActionListener,
 									mg.insertImageToMongoDB(mg.convertToByteArray(mg.convert(convertToBase64(subject.getFingers().get(i2).getImage().toImage(),"png"))),subject.getFingers().get(i2).getPosition().toString());
 
 								}}
-						}
+						}*/
 
 					/*	subject.getFingers().forEach(element -> {
 
@@ -209,6 +209,10 @@ public final class FingerCaptureFrame extends JDialog implements ActionListener,
 				}
 			});
 
+		}
+
+		public int getNbrecord(){
+			return  subject.getTemplate().getFingers().getRecords().size();
 		}
 
 		public  void convertBase64ToPNG(String base64String, String fileName) throws IOException {
