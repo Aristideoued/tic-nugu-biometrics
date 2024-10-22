@@ -80,7 +80,7 @@ public class Exemple extends JFrame {
                 if (true) {
                     //auth.authenticateUser(matricule, password)
                     //JOptionPane.showMessageDialog(null, "Connexion réussie !");
-                    new PrincipalUI().setVisible(true);
+                    new PrincipalUI();
                     dispose(); // Ferme la fenêtre de connexion
                 } else {
                     JOptionPane.showMessageDialog(null, "Matricule ou mot de passe incorrect.");

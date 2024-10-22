@@ -49,6 +49,7 @@ private JMenuItem listeUtilisateur = new JMenuItem("Consulter");
       //  JFrame fen = new JFrame();
 this.setTitle("Systeme d'enrolement biometrique de l'ETAT");
 this.setSize(800, 400);
+this.setVisible(true);
 //Nous demandons maintenant à notre objet de se positionner au centre
 this.setLocationRelativeTo(null);
 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,7 +94,6 @@ this.setJMenuBar(menuBar);
          listeUtilisateur.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-              //****************  new ListeUserUI().setVisible(true);
             }
         });
 
