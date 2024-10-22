@@ -23,7 +23,9 @@ dependencies {
 	implementation project(":samples-utils")
 	implementation 'org.slf4j:slf4j-api:2.0.9'
 	implementation 'org.slf4j:slf4j-simple:2.0.9'
+	implementation 'com.toedter:jcalendar:1.4'
 }
+
 
 apply from: "../../../Common/Java/buildCommon/run.gradle"
 

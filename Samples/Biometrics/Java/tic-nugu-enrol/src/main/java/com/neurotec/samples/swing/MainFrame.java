@@ -250,11 +250,11 @@ public final class MainFrame extends JFrame implements ActionListener {
 
 		});
 		infoPanel = new InfoPanel(this);
-
-		tabbedPane.addTab("Main", slapsPanel);
+        tabbedPane.addTab("Informations", infoPanel);
+		tabbedPane.addTab("Mains", slapsPanel);
 		tabbedPane.addTab("Doigts", normalFingersPanel);
 		tabbedPane.addTab("Doigts enrollés", rolledFingersPanel);
-		//tabbedPane.addTab("Information", infoPanel);
+		
 
 		contentPane.add(createTopPanel(), BorderLayout.BEFORE_FIRST_LINE);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
