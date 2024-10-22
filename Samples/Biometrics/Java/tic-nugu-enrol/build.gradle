@@ -21,6 +21,9 @@ dependencies {
 	implementation project.modules."flatlaf"
 	implementation project(":samples-utils")
 	implementation 'org.slf4j:slf4j-api:2.0.9'
+	implementation 'org.springframework.security:spring-security-core:5.8.0'
+	implementation 'org.postgresql:postgresql:42.6.0'
+	implementation files('libs/opencv-4100.jar')
 	implementation 'org.slf4j:slf4j-simple:2.0.9'
 }
 

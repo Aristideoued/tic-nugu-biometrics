@@ -16,6 +16,7 @@ import com.neurotec.jna.HNObject;
 import com.neurotec.licensing.NLicenseManager;
 import com.neurotec.plugins.NDataFileBuilder;
 import com.neurotec.plugins.NDataFileManager;
+import com.neurotec.samples.swing.Exemple;
 import com.neurotec.samples.swing.MainFrame;
 import com.neurotec.samples.util.LibraryManager;
 import com.neurotec.samples.util.LicenseManager;
@@ -82,8 +83,8 @@ public final class EnrollmentSample implements PropertyChangeListener {
 			@Override
 			public void run() {
 				try {
-					JFrame frame = new MainFrame();
-					Dimension d = new Dimension(1015, 625);
+					JFrame frame = new Exemple();
+				/*	Dimension d = new Dimension(1015, 625);
 
 					frame.setSize(d);
 					frame.setMinimumSize(new Dimension(800, 600));
@@ -92,7 +93,7 @@ public final class EnrollmentSample implements PropertyChangeListener {
 					frame.setResizable(true);
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.setTitle("Tic-nugu");
-					frame.setLocationRelativeTo(null);
+					frame.setLocationRelativeTo(null);*/
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
