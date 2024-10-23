@@ -1,13 +1,6 @@
 package com.neurotec.samples.swing;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Event;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
@@ -353,7 +346,12 @@ public final class MainFrame extends JFrame implements ActionListener {
 		chkRolledFingers = new JCheckBox("Capturer doigts enrollés");
 		chkRolledFingers.addActionListener(this);
 
-		btnSartCapturing = new JButton("Prendre empreintes");
+		btnSartCapturing = new JButton("Commencer");
+		btnSartCapturing.setBackground(Color.BLUE); // Définit la couleur de fond en bleu
+		btnSartCapturing.setForeground(Color.WHITE); // Définit la couleur du texte en blanc
+
+// Optionnel : Pour s'assurer que le texte reste lisible, vous pouvez également définir la police.
+		btnSartCapturing.setFont(new Font("Arial", Font.BOLD, 14));
 
 
 

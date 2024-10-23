@@ -101,7 +101,13 @@ public final class SlapsPanel extends JPanel {
 
 	//	saveAllButton.setForeground(Color.WHITE);  // Texte en blanc
 		saveAllButton.setEnabled(true);
-		saveAllButton.setBackground(new Color(0, 128, 255));  // Bleu clair
+		//saveAllButton.setBackground(new Color(0, 128, 255));  // Bleu clair
+
+		saveAllButton.setBackground(Color.BLUE); // Définit la couleur de fond en bleu
+		saveAllButton.setForeground(Color.WHITE); // Définit la couleur du texte en blanc
+
+// Optionnel : Pour s'assurer que le texte reste lisible, vous pouvez également définir la police.
+		saveAllButton.setFont(new Font("Arial", Font.BOLD, 14));
 		// Créer des contraintes spécifiques pour le bouton
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 1;  // Colonne

@@ -201,6 +201,8 @@ public final class InfoPanel extends JPanel {
         }
     }
 
+
+
     private String convertImageToBase64(NImage image) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         try {
