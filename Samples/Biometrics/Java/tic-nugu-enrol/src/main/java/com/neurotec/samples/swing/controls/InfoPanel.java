@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
+import com.neurotec.samples.swing.MainFrame;
 import com.toedter.calendar.JCalendar;
 import com.neurotec.biometrics.NFace;
 import com.neurotec.biometrics.swing.NFaceView;
@@ -37,7 +38,7 @@ public final class InfoPanel extends JPanel {
     private JCalendar calendar; // JCalendar pour la date
     private JComboBox<String> cmbSexe;
     private JButton btnSave;
-
+    JButton btnNext;
     private Frame owner;
 
     public InfoPanel(Frame owner) {
@@ -49,19 +50,21 @@ public final class InfoPanel extends JPanel {
     private void initializeComponents() {
         setLayout(new BorderLayout());
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-
-        // Panes pour séparer la partie formulaire et photo
+      //  new MainFrame().setBtnStart(false);     // Panes pour séparer la partie formulaire et photo
         JPanel formPanel = createFormPanel();
         JPanel imagePanel = createImagePanel();
 
+       // MainFrame mf=new MainFrame();
+       // mf.setBtnStart(false);
+
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, formPanel, imagePanel);
-        splitPane.setDividerLocation(600);
+        splitPane.setDividerLocation(800);
         splitPane.setDividerSize(10);
         add(splitPane, BorderLayout.CENTER);
     }
 
     private JPanel createFormPanel() {
-        JPanel panel = new JPanel(new GridLayout(0, 2, 10, 10));
+        JPanel panel = new JPanel(new GridLayout(0, 2, 50, 10));
         panel.setBorder(BorderFactory.createTitledBorder("Informations Personnelles"));
 
         // Champs avec labels
@@ -114,35 +117,55 @@ public final class InfoPanel extends JPanel {
         panel.add(cmbSexe);
 
         // Bouton "Enregistrer"
-        btnSave = createCustomButton("Enregistrer", "Enregistrer les informations");
+      /*  btnSave = createCustomButton("Suivant", "Enregistrer les informations");
+        btnSave.setEnabled(false);
         btnSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 saveInformationToDatabase();
             }
         });
-        panel.add(btnSave);
+        btnSave.setPreferredSize(new Dimension(150, 40)); // Augmente la hauteur du bouton
+        btnSave.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0)); // 0 pour haut, 20 pour gauche, 0 pour bas, 0 pour droite
+
+        panel.add(btnSave);*/
 
         return panel;
     }
 
     private JPanel createImagePanel() {
         JPanel panel = new JPanel(new BorderLayout());
-        panel.setBorder(BorderFactory.createTitledBorder("Photo de Profil"));
+      //  panel.setPreferredSize(new Dimension(250, 200)); // Ajuste la largeur ici
+        panel.setBorder(BorderFactory.createTitledBorder("Photo d'identité"));
 
         thumbnailImageView = new NFaceView();
         thumbnailImageView.setAutofit(true); // S'assurer que l'image s'adapte bien
         panel.add(thumbnailImageView, BorderLayout.CENTER);
 
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JButton btnCapture = createCustomButton("Capture Photo", "Capture une photo");
+        JButton btnCapture = createCustomButton("Capturer la Photo", "Capture une photo");
         btnCapture.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 btnCaptureClick();
             }
         });
+
+
+         btnNext = createCustomButton("Suivant", "Enregistrer les informations");
+
+        btnNext.setEnabled(false);
+        btnNext.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveInformationToDatabase();
+            }
+        });
+        btnNext.setPreferredSize(new Dimension(150, 40)); // Augmente la hauteur du bouton
+        btnNext.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0)); // 0 pour haut, 20 pour gauche, 0 pour bas, 0 pour droite
+        btnNext.setEnabled(false);
         buttonPanel.add(btnCapture);
+        buttonPanel.add(btnNext);
         panel.add(buttonPanel, BorderLayout.SOUTH);
 
         return panel;
@@ -160,6 +183,8 @@ public final class InfoPanel extends JPanel {
         // Mettre à jour le visage capturé
         NFace capturedFace = EnrollmentDataModel.getInstance().getThumbFace();
         if (capturedFace != null) {
+
+            btnNext.setEnabled(true);
             logger.info("Captured face: not null");
             thumbnailImageView.setFace(capturedFace); // Prévisualiser l'image capturée
 
@@ -244,9 +269,9 @@ public final class InfoPanel extends JPanel {
         }
 
         // Connexion à la base de données
-        String dbUrl = "jdbc:postgresql://localhost:5432/enrolDB";
+        String dbUrl = "jdbc:postgresql://localhost:5432/tic-nugu";
         String dbUser = "postgres";
-        String dbPassword = "admin";
+        String dbPassword = "2885351";
 
         try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword)) {
             String sql = "INSERT INTO utilisateur_info (nip, refPiece, typePiece, matricule, nom, prenom, nomJF, " +

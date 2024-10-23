@@ -60,10 +60,7 @@ import com.neurotec.samples.enrollment.fingers.HandSegmentSelector;
 import com.neurotec.samples.enrollment.fingers.Scenario;
 import com.neurotec.samples.events.FingersPanelPropertyChangedListner;
 import com.neurotec.samples.events.LongTaskListener;
-import com.neurotec.samples.swing.controls.FingersPanel;
-import com.neurotec.samples.swing.controls.FingersViewToolBar;
-import com.neurotec.samples.swing.controls.InfoPanel;
-import com.neurotec.samples.swing.controls.SlapsPanel;
+import com.neurotec.samples.swing.controls.*;
 import com.neurotec.samples.util.LicenseManager;
 import com.neurotec.samples.util.Utils;
 import com.neurotec.swing.AboutBox;
@@ -160,6 +157,7 @@ public final class MainFrame extends JFrame implements ActionListener {
 	private FingersPanel normalFingersPanel;
 	private FingersPanel rolledFingersPanel;
 	private InfoPanel infoPanel;
+	private SignaturePanel signaturePanel;
 
 	// ==============================================
 	// Private fields
@@ -250,10 +248,13 @@ public final class MainFrame extends JFrame implements ActionListener {
 
 		});
 		infoPanel = new InfoPanel(this);
-        tabbedPane.addTab("Informations", infoPanel);
+		signaturePanel = new SignaturePanel(this);
+
+		tabbedPane.addTab("Informations", infoPanel);
 		tabbedPane.addTab("Mains", slapsPanel);
 		tabbedPane.addTab("Doigts", normalFingersPanel);
 		tabbedPane.addTab("Doigts enrollés", rolledFingersPanel);
+		tabbedPane.addTab("Signature", signaturePanel);
 		
 
 		contentPane.add(createTopPanel(), BorderLayout.BEFORE_FIRST_LINE);
@@ -261,6 +262,9 @@ public final class MainFrame extends JFrame implements ActionListener {
 		pack();
 	}
 
+	public void  setBtnStart(boolean st){
+		btnSartCapturing.setEnabled(st);
+	}
 	private void createMenuBar() {
 		JMenuBar menuBar = new JMenuBar();
 
@@ -349,7 +353,10 @@ public final class MainFrame extends JFrame implements ActionListener {
 		chkRolledFingers = new JCheckBox("Capturer doigts enrollés");
 		chkRolledFingers.addActionListener(this);
 
-		btnSartCapturing = new JButton("Lancer");
+		btnSartCapturing = new JButton("Prendre empreintes");
+
+
+
 		btnSartCapturing.addActionListener(this);
 
 		GridBagUtils gridBagUtils = new GridBagUtils(GridBagConstraints.VERTICAL);
