@@ -40,33 +40,33 @@ public class Mongo {
         }
     }
 
-    public static void insertImageToMongoDB(byte[] imageBytes, String doigt) {
+    public static void insertImageToMongoDB(byte[] imageBytes, String doigt,String remoteID) {
         // Connexion à la base de données MongoDB
         String main="";
-       String x =doigt.split("_")[0];
-       if(x.equals("LEFT")){
-           main="Gauche";
-       }
-       else {
-           main="Droite";
-       }
+        String x =doigt.split("_")[0];
+        if(x.equals("LEFT")){
+            main="Gauche";
+        }
+        else {
+            main="Droite";
+        }
 
-       String dg=doigt.split("_")[1];
-       if(dg.equals("LITTLE")){
-           doigt="Auriculaire";
-       }
-       else if(dg.equals("RING")){
-           doigt="Annulaire";
-       }
-       else if(dg.equals("MIDDLE")){
-           doigt="Majeure";
-       }
-       else if(dg.equals("INDEX")){
-           doigt="Index";
-       }
-       else if(dg.equals("THUMB")){
-           doigt="Pouce";
-       }
+        String dg=doigt.split("_")[1];
+        if(dg.equals("LITTLE")){
+            doigt="Auriculaire";
+        }
+        else if(dg.equals("RING")){
+            doigt="Annulaire";
+        }
+        else if(dg.equals("MIDDLE")){
+            doigt="Majeure";
+        }
+        else if(dg.equals("INDEX")){
+            doigt="Index";
+        }
+        else if(dg.equals("THUMB")){
+            doigt="Pouce";
+        }
 
         try (MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017")) {
             MongoDatabase database = mongoClient.getDatabase("tic-nugu");
@@ -77,7 +77,7 @@ public class Mongo {
                     .append("main", main)
                     .append("imageData", imageBytes)
 
-                    .append("remoteId", "1");
+                    .append("remoteId", remoteID);
 
             // Insérer le document dans la collection
             collection.insertOne(document);
@@ -87,7 +87,7 @@ public class Mongo {
         }
     }
 
-    public static void insertMunitieToMongoDB(int x,int y, String doigt) {
+    public static void insertMunitieToMongoDB(int x,int y, String doigt,String remoteID) {
         // Connexion à la base de données MongoDB
         String main="";
         String x1 =doigt.split("_")[0];
@@ -125,15 +125,14 @@ public class Mongo {
                     .append("x", x)
                     .append("y", y)
 
-                    .append("remoteId", "1");
+                    .append("remoteId", remoteID);
 
             // Insérer le document dans la collection
             collection.insertOne(document);
-          //  System.out.println("Image '" + doigt + "' insérée avec succès !");
+            //  System.out.println("Image '" + doigt + "' insérée avec succès !");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
 }
-}
-

@@ -96,7 +96,7 @@ public final class FingerCaptureFrame extends JDialog implements ActionListener,
 	}
 
 	private class TemplateCreationHandler implements CompletionHandler<NBiometricTask, Object> {
-      Mongo mg=new Mongo();
+		Mongo mg=new Mongo();
 		@Override
 		public void completed(final NBiometricTask result, final Object attachment) {
 			SwingUtilities.invokeLater(new Runnable() {
@@ -424,17 +424,17 @@ public final class FingerCaptureFrame extends JDialog implements ActionListener,
 	private void moveToSelectedIndex() {
 		if (indexChangingOrder != null) {
 			switch (indexChangingOrder) {
-			case MOVE_TO_NEXT_INDEX:
-				moveToNext();
-				break;
-			case MOVE_TO_PRVIOUS_INDEX:
-				moveToPrevious();
-				break;
-			case MOVE_TO_SELECTED_INDEX:
-				changeSelectedTask();
-				break;
-			default:
-				break;
+				case MOVE_TO_NEXT_INDEX:
+					moveToNext();
+					break;
+				case MOVE_TO_PRVIOUS_INDEX:
+					moveToPrevious();
+					break;
+				case MOVE_TO_SELECTED_INDEX:
+					changeSelectedTask();
+					break;
+				default:
+					break;
 			}
 		}
 	}
@@ -643,25 +643,25 @@ public final class FingerCaptureFrame extends JDialog implements ActionListener,
 
 	private void selectFingers(NFPosition position) {
 		switch (position) {
-		case PLAIN_LEFT_FOUR_FINGERS:
-			fingerSelector.setSelected(NFPosition.LEFT_LITTLE_FINGER, !fingerSelector.getMissingPositions().contains(NFPosition.LEFT_LITTLE_FINGER));
-			fingerSelector.setSelected(NFPosition.LEFT_RING_FINGER, !fingerSelector.getMissingPositions().contains(NFPosition.LEFT_RING_FINGER));
-			fingerSelector.setSelected(NFPosition.LEFT_MIDDLE_FINGER, !fingerSelector.getMissingPositions().contains(NFPosition.LEFT_MIDDLE_FINGER));
-			fingerSelector.setSelected(NFPosition.LEFT_INDEX_FINGER, !fingerSelector.getMissingPositions().contains(NFPosition.LEFT_INDEX_FINGER));
-			break;
-		case PLAIN_RIGHT_FOUR_FINGERS:
-			fingerSelector.setSelected(NFPosition.RIGHT_LITTLE_FINGER, !fingerSelector.getMissingPositions().contains(NFPosition.RIGHT_LITTLE_FINGER));
-			fingerSelector.setSelected(NFPosition.RIGHT_RING_FINGER, !fingerSelector.getMissingPositions().contains(NFPosition.RIGHT_RING_FINGER));
-			fingerSelector.setSelected(NFPosition.RIGHT_MIDDLE_FINGER, !fingerSelector.getMissingPositions().contains(NFPosition.RIGHT_MIDDLE_FINGER));
-			fingerSelector.setSelected(NFPosition.RIGHT_INDEX_FINGER, !fingerSelector.getMissingPositions().contains(NFPosition.RIGHT_INDEX_FINGER));
-			break;
-		case PLAIN_THUMBS:
-			fingerSelector.setSelected(NFPosition.LEFT_THUMB, !fingerSelector.getMissingPositions().contains(NFPosition.LEFT_THUMB));
-			fingerSelector.setSelected(NFPosition.RIGHT_THUMB, !fingerSelector.getMissingPositions().contains(NFPosition.RIGHT_THUMB));
-			break;
-		default:
-			fingerSelector.setSelected(position, true);
-			break;
+			case PLAIN_LEFT_FOUR_FINGERS:
+				fingerSelector.setSelected(NFPosition.LEFT_LITTLE_FINGER, !fingerSelector.getMissingPositions().contains(NFPosition.LEFT_LITTLE_FINGER));
+				fingerSelector.setSelected(NFPosition.LEFT_RING_FINGER, !fingerSelector.getMissingPositions().contains(NFPosition.LEFT_RING_FINGER));
+				fingerSelector.setSelected(NFPosition.LEFT_MIDDLE_FINGER, !fingerSelector.getMissingPositions().contains(NFPosition.LEFT_MIDDLE_FINGER));
+				fingerSelector.setSelected(NFPosition.LEFT_INDEX_FINGER, !fingerSelector.getMissingPositions().contains(NFPosition.LEFT_INDEX_FINGER));
+				break;
+			case PLAIN_RIGHT_FOUR_FINGERS:
+				fingerSelector.setSelected(NFPosition.RIGHT_LITTLE_FINGER, !fingerSelector.getMissingPositions().contains(NFPosition.RIGHT_LITTLE_FINGER));
+				fingerSelector.setSelected(NFPosition.RIGHT_RING_FINGER, !fingerSelector.getMissingPositions().contains(NFPosition.RIGHT_RING_FINGER));
+				fingerSelector.setSelected(NFPosition.RIGHT_MIDDLE_FINGER, !fingerSelector.getMissingPositions().contains(NFPosition.RIGHT_MIDDLE_FINGER));
+				fingerSelector.setSelected(NFPosition.RIGHT_INDEX_FINGER, !fingerSelector.getMissingPositions().contains(NFPosition.RIGHT_INDEX_FINGER));
+				break;
+			case PLAIN_THUMBS:
+				fingerSelector.setSelected(NFPosition.LEFT_THUMB, !fingerSelector.getMissingPositions().contains(NFPosition.LEFT_THUMB));
+				fingerSelector.setSelected(NFPosition.RIGHT_THUMB, !fingerSelector.getMissingPositions().contains(NFPosition.RIGHT_THUMB));
+				break;
+			default:
+				fingerSelector.setSelected(position, true);
+				break;
 
 		}
 	}
@@ -872,7 +872,7 @@ public final class FingerCaptureFrame extends JDialog implements ActionListener,
 		this.subject = subject;
 
 	}
-	
+
 	public  void showList(){
 		captureList.forEach(element -> {
 			System.out.println("<======================================List de capture================> "+element.getBinarizedImage());

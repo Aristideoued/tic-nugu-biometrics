@@ -16,20 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
 import com.neurotec.biometrics.NBiometricType;
@@ -45,6 +32,7 @@ import com.neurotec.event.ChangeEvent;
 import com.neurotec.event.ChangeListener;
 import com.neurotec.lang.NCore;
 import com.neurotec.licensing.NLicense;
+import com.neurotec.licensing.NLicenseManager;
 import com.neurotec.samples.Utilities;
 import com.neurotec.samples.enrollment.DataProcessor;
 import com.neurotec.samples.enrollment.EnrollmentDataModel;
@@ -73,40 +61,40 @@ public final class MainFrame extends JFrame implements ActionListener {
 		public void collectionChanged(NCollectionChangeEvent e) {
 			NFingerView view;
 			switch (e.getAction()) {
-			case ADD:
-				List<?> newItems = e.getNewItems();
-				for (Object finger : newItems) {
-					view = getView((NFinger) finger);
-					view.setFinger((NFinger) finger);
-					((JPanel) view.getParent()).putClientProperty("TAG", view.getFinger());
-				}
-				break;
-			case REMOVE:
-				List<?> oldItems = e.getOldItems();
-				for (Object finger : oldItems) {
-					view = getView((NFinger) finger);
-					view.setFinger(null);
-					((JPanel) view.getParent()).putClientProperty("TAG", null);
-				}
-				break;
-			case RESET:
-				for (NFPosition position : slaps) {
-					view = getView(position, false);
-					view.setFinger(null);
-					((JPanel) view.getParent()).putClientProperty("TAG", null);
-				}
-				for (NFPosition position : fingers) {
-					view = getView(position, false);
-					view.setFinger(null);
-					view = getView(position, true);
-					view.setFinger(null);
-					((JPanel) view.getParent()).putClientProperty("TAG", null);
-				}
-				break;
-			case MOVE:
-			case REPLACE:
-			default:
-				break;
+				case ADD:
+					List<?> newItems = e.getNewItems();
+					for (Object finger : newItems) {
+						view = getView((NFinger) finger);
+						view.setFinger((NFinger) finger);
+						((JPanel) view.getParent()).putClientProperty("TAG", view.getFinger());
+					}
+					break;
+				case REMOVE:
+					List<?> oldItems = e.getOldItems();
+					for (Object finger : oldItems) {
+						view = getView((NFinger) finger);
+						view.setFinger(null);
+						((JPanel) view.getParent()).putClientProperty("TAG", null);
+					}
+					break;
+				case RESET:
+					for (NFPosition position : slaps) {
+						view = getView(position, false);
+						view.setFinger(null);
+						((JPanel) view.getParent()).putClientProperty("TAG", null);
+					}
+					for (NFPosition position : fingers) {
+						view = getView(position, false);
+						view.setFinger(null);
+						view = getView(position, true);
+						view.setFinger(null);
+						((JPanel) view.getParent()).putClientProperty("TAG", null);
+					}
+					break;
+				case MOVE:
+				case REPLACE:
+				default:
+					break;
 			}
 			zoomViews();
 		}
@@ -140,6 +128,7 @@ public final class MainFrame extends JFrame implements ActionListener {
 	private JCheckBox chkPlainFingers;
 	private JCheckBox chkSlaps;
 	private JCheckBox chkRolledFingers;
+	private JTabbedPane tabbedPane;
 
 	private JButton btnSartCapturing;
 
@@ -151,7 +140,7 @@ public final class MainFrame extends JFrame implements ActionListener {
 	private FingersPanel rolledFingersPanel;
 	private InfoPanel infoPanel;
 	private SignaturePanel signaturePanel;
-
+	private JTextField txtNom;
 	// ==============================================
 	// Private fields
 	// ==============================================
@@ -213,12 +202,14 @@ public final class MainFrame extends JFrame implements ActionListener {
 	// ==============================================
 
 	private void initializeComponents() {
+
+
 		createMenuBar();
 
 		Container contentPane = getContentPane();
 		contentPane.setLayout(new BorderLayout());
 
-		JTabbedPane tabbedPane = new JTabbedPane();
+		tabbedPane = new JTabbedPane();
 
 		toolBar = new FingersViewToolBar();
 
@@ -243,16 +234,26 @@ public final class MainFrame extends JFrame implements ActionListener {
 		infoPanel = new InfoPanel(this);
 		signaturePanel = new SignaturePanel(this);
 
-		tabbedPane.addTab("Informations", infoPanel);
+
+		//tabbedPane.addTab("Informations", infoPanel);
 		tabbedPane.addTab("Mains", slapsPanel);
 		tabbedPane.addTab("Doigts", normalFingersPanel);
 		tabbedPane.addTab("Doigts enrollés", rolledFingersPanel);
-		tabbedPane.addTab("Signature", signaturePanel);
-		
+		//tabbedPane.addTab("Signature", signaturePanel);
+
 
 		contentPane.add(createTopPanel(), BorderLayout.BEFORE_FIRST_LINE);
 		contentPane.add(tabbedPane, BorderLayout.CENTER);
 		pack();
+	}
+
+	public void switchToPanel(String panel) {
+		for (int i = 0; i < tabbedPane.getTabCount(); i++) {
+			if (panel.equals(tabbedPane.getTitleAt(i))) {
+				tabbedPane.setSelectedIndex(i);
+				break;
+			}
+		}
 	}
 
 	public void  setBtnStart(boolean st){
@@ -349,6 +350,7 @@ public final class MainFrame extends JFrame implements ActionListener {
 		btnSartCapturing = new JButton("Commencer");
 		btnSartCapturing.setBackground(Color.BLUE); // Définit la couleur de fond en bleu
 		btnSartCapturing.setForeground(Color.WHITE); // Définit la couleur du texte en blanc
+		btnSartCapturing.setSize(150,50);
 
 // Optionnel : Pour s'assurer que le texte reste lisible, vous pouvez également définir la police.
 		btnSartCapturing.setFont(new Font("Arial", Font.BOLD, 14));
@@ -357,8 +359,9 @@ public final class MainFrame extends JFrame implements ActionListener {
 
 		btnSartCapturing.addActionListener(this);
 
+
 		GridBagUtils gridBagUtils = new GridBagUtils(GridBagConstraints.VERTICAL);
-		gridBagUtils.setInsets(new Insets(2, 2, 2, 2));
+		gridBagUtils.setInsets(new Insets(2, 2, 2, 0));
 
 		gridBagUtils.addToGridBagLayout(0, 0, 2, 1, capturingOptionsPanel, chkPlainFingers);
 		gridBagUtils.addToGridBagLayout(1, 1, 1, 1, capturingOptionsPanel, chkSlaps);
@@ -379,10 +382,19 @@ public final class MainFrame extends JFrame implements ActionListener {
 
 		fingerSelectorPanel.add(fingerSelector, BorderLayout.CENTER);
 
+
+
 		topPanel.add(capturingOptionsPanel);
 		topPanel.add(Box.createHorizontalStrut(4));
 		topPanel.add(fingerSelectorPanel);
 		topPanel.add(Box.createGlue());
+
+
+
+
+
+		// Constraints for label
+
 		return topPanel;
 	}
 
@@ -459,9 +471,18 @@ public final class MainFrame extends JFrame implements ActionListener {
 
 	private void startCapturing() {
 		if (newSubject) {
+
+		/*	if( infoPanel.getBase64Image()==" "|| infoPanel.getBase64Image()==null || !infoPanel.isActif()){
+				Utilities.showWarning(this, "Veuillez d'abord renseigner le formulaire et prendre la photo");
+				return;
+			}*/
 			model.setSubject(new NSubject());
 			model.getSubject().getFingers().addCollectionChangeListener(new FingersCollectionChangeListener());
 			createFingers(model.getSubject());
+
+
+
+
 			if (model.getSubject().getFingers().size() == 0) {
 				Utilities.showWarning(this, "Aucun doigt selectionné...");
 				return;
