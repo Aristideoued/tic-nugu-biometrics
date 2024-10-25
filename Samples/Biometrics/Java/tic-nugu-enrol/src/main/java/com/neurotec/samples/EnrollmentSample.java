@@ -84,7 +84,7 @@ public final class EnrollmentSample implements PropertyChangeListener {
 			public void run() {
 				try {
 					//JFrame frame = new MainFrame();
-					JFrame frame = new LoginFrame();
+					/*JFrame frame = new LoginFrame();
 
 					Dimension d = new Dimension(500, 200); // Ajuste la taille selon ton besoin
 
@@ -98,7 +98,21 @@ public final class EnrollmentSample implements PropertyChangeListener {
 					frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 					frame.setTitle("Tic-nugu");
 					frame.setLocationRelativeTo(null);
-					frame.setVisible(true);
+					frame.setVisible(true);*/
+
+					MainFrame mainFrame = new MainFrame();
+
+
+					Dimension d = new Dimension(1600, 800);
+					mainFrame.setSize(d);
+					mainFrame.setMinimumSize(new Dimension(300, 200));
+					mainFrame.setPreferredSize(d);
+
+					mainFrame.setResizable(true); // Optionnel, si tu veux empêcher le redimensionnement
+					mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+					mainFrame.setTitle("Tic-nugu");
+					mainFrame.setLocationRelativeTo(null);
+					mainFrame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 					SwingUtilities.invokeLater(() -> { JOptionPane.showMessageDialog(null, e.toString()); });

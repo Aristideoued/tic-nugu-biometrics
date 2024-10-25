@@ -38,7 +38,9 @@ public final class SlapsPanel extends JPanel {
 	private NFingerView nfvRightFour;
 	private NFingerView nfvThumbs;
 
-	private String directory;
+	private String remoteID;
+	private JTextField txtNom;
+
 
 
 	// ==============================================
@@ -82,6 +84,10 @@ public final class SlapsPanel extends JPanel {
 		rightPanel.setPreferredSize(rightPanel.getPreferredSize());
 		JScrollPane rightScrollPane = new JScrollPane(rightPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
+
+
+
+
 		GridBagUtils gridBagUtils = new GridBagUtils(GridBagConstraints.BOTH);
 		gridBagUtils.setInsets(new Insets(1, 1, 1, 1));
 
@@ -91,6 +97,16 @@ public final class SlapsPanel extends JPanel {
 		gridBagUtils.addToGridBagLayout(0, 1, 1, 1, 0.3, 1, this, leftScrollPane);
 		gridBagUtils.addToGridBagLayout(1, 1, this, thumbScrollPane);
 		gridBagUtils.addToGridBagLayout(2, 1, this, rightScrollPane);
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -118,26 +134,36 @@ public final class SlapsPanel extends JPanel {
 		gbc.fill = GridBagConstraints.HORIZONTAL;  // Le bouton s'étend horizontalement
 		gbc.weightx = 1.0;  // Permet au bouton de s'étendre horizontalement en fonction de l'espace disponible
 		gbc.insets = new Insets(10, 10, 10, 10);  // Marges autour du bouton
-
 		add(saveAllButton, gbc);  // Ajout du bouton avec les nouvelles contraintes
+
+
 
 		saveAllButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				saveAllFingerprints();
+				saveAllFingerprints("1234");
 			}
 		});
 		//gridBagUtils.addToGridBagLayout(1, 2, this, saveAllButton);
 	}
 
-	public String getDirectory(){
+	/*public String getDirectory(){
 		return  this.directory;
+	}*/
+
+	public  void setRemoteID(String d){
+		this.remoteID=d;
 	}
 
-	public  void setDirectory(String d){
-		this.directory=d;
+	public  String getRemoteID(){
+		return  this.remoteID;
 	}
-	private void saveAllFingerprints() {
+	private void saveAllFingerprints(String idEnrolle) {
+
+		/*if (getRemoteID()==null || getRemoteID().isEmpty()) {
+			Utilities.showWarning(this, "Veuillez fournir l'identifiant de l'enrollé");
+			return;
+		}*/
 
 
 		Missing mss=new Missing();
@@ -151,14 +177,14 @@ public final class SlapsPanel extends JPanel {
 
 			if((10-fgf.getSubject().getMissingFingers().size())==fgf.getSubject().getTemplate().getFingers().getRecords().size()){
 				Mongo mg=new Mongo();
-				setDirectory(createRandomDirectory());
+				createRandomDirectory(idEnrolle);
 
 
 				fgf.getSubject().getTemplate().getFingers().getRecords().forEach(element -> {
 					System.out.println("<=======================Nombre de munities par doigt="+element.getMinutiae().size());
 
 					for (int i=0;i<element.getMinutiae().size();i++){
-						mg.insertMunitieToMongoDB(element.getMinutiae().get(i).x,element.getMinutiae().get(i).y,element.getPosition().toString());
+						mg.insertMunitieToMongoDB(element.getMinutiae().get(i).x,element.getMinutiae().get(i).y,element.getPosition().toString(),idEnrolle);
 
 					}
 
@@ -172,11 +198,11 @@ public final class SlapsPanel extends JPanel {
 
 					if(fgf.getSubject().getFingers().get(i).getBinarizedImage(true)!=null){
 						try {
-							convertBase64ToPNG(convertToBase64(fgf.getSubject().getFingers().get(i).getImage().toImage(),"png"),fgf.getSubject().getFingers().get(i).getPosition().toString());
+							convertBase64ToPNG(convertToBase64(fgf.getSubject().getFingers().get(i).getImage().toImage(),"png"),fgf.getSubject().getFingers().get(i).getPosition().toString(),idEnrolle);
 						} catch (IOException e) {
 							throw new RuntimeException(e);
 						}
-						mg.insertImageToMongoDB(mg.convertToByteArray(mg.convert(convertToBase64(fgf.getSubject().getFingers().get(i).getImage().toImage(),"png"))),fgf.getSubject().getFingers().get(i).getPosition().toString());
+						mg.insertImageToMongoDB(mg.convertToByteArray(mg.convert(convertToBase64(fgf.getSubject().getFingers().get(i).getImage().toImage(),"png"))),fgf.getSubject().getFingers().get(i).getPosition().toString(),idEnrolle);
 
 					}
 				}
@@ -207,7 +233,7 @@ public final class SlapsPanel extends JPanel {
 
 	}
 
-	public  void convertBase64ToPNG(String base64String, String fileName) throws IOException {
+	public  void convertBase64ToPNG(String base64String, String fileName,String remoteID) throws IOException {
 		// Retirer le préfixe si présent (par exemple, "data:image/png;base64,")
 		if (base64String.startsWith("data:image/png;base64,")) {
 			base64String = base64String.substring("data:image/png;base64,".length());
@@ -243,7 +269,7 @@ public final class SlapsPanel extends JPanel {
 		// Décoder la chaîne Base64
 		byte[] imageBytes = Base64.getDecoder().decode(base64String);
 
-		File dir = new File(getDirectory());
+		File dir = new File(remoteID);
 		// Écrire les octets dans un fichier
 		/*try (FileOutputStream fos = new FileOutputStream(getDirectory()+fileName)) {
 			fos.write(imageBytes);
@@ -270,13 +296,13 @@ public final class SlapsPanel extends JPanel {
 	}
 
 
-	public static String createRandomDirectory() {
+	public static String createRandomDirectory(String remoteId) {
 		// Générer un Long aléatoire
-		Random random = new Random();
-		long randomLong = Math.abs(random.nextLong());
+		//Random random = new Random();
+		//long randomLong = Math.abs(random.nextLong());
 
 		// Créer le nom du dossier
-		String directoryName = String.valueOf(randomLong);
+		String directoryName = String.valueOf(remoteId);
 
 		// Créer le dossier
 		File directory = new File(directoryName);

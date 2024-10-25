@@ -63,7 +63,7 @@ public class LoginFrame extends JFrame {
                 mainFrame.setTitle("Tic-nugu - Login");
                 mainFrame.setLocationRelativeTo(null);
                 mainFrame.setVisible(true);
-                mainFrame.setVisible(true);
+               // mainFrame.setVisible(true);
                 dispose(); // Ferme le LoginFrame
             }
         });

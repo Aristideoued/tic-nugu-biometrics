@@ -40,7 +40,7 @@ public class Mongo {
         }
     }
 
-    public static void insertImageToMongoDB(byte[] imageBytes, String doigt) {
+    public static void insertImageToMongoDB(byte[] imageBytes, String doigt,String remoteID) {
         // Connexion à la base de données MongoDB
         String main="";
        String x =doigt.split("_")[0];
@@ -77,7 +77,7 @@ public class Mongo {
                     .append("main", main)
                     .append("imageData", imageBytes)
 
-                    .append("remoteId", "1");
+                    .append("remoteId", remoteID);
 
             // Insérer le document dans la collection
             collection.insertOne(document);
@@ -87,7 +87,7 @@ public class Mongo {
         }
     }
 
-    public static void insertMunitieToMongoDB(int x,int y, String doigt) {
+    public static void insertMunitieToMongoDB(int x,int y, String doigt,String remoteID) {
         // Connexion à la base de données MongoDB
         String main="";
         String x1 =doigt.split("_")[0];
@@ -125,7 +125,7 @@ public class Mongo {
                     .append("x", x)
                     .append("y", y)
 
-                    .append("remoteId", "1");
+                    .append("remoteId", remoteID);
 
             // Insérer le document dans la collection
             collection.insertOne(document);

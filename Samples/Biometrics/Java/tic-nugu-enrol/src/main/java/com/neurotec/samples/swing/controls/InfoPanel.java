@@ -1,5 +1,6 @@
 package com.neurotec.samples.swing.controls;
 
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,7 +26,6 @@ import com.neurotec.samples.enrollment.EnrollmentDataModel;
 import com.neurotec.samples.swing.PictureCapturingDialog;
 
 public final class InfoPanel extends JPanel {
-
     private static final long serialVersionUID = 1L;
     private static final Logger logger = Logger.getLogger(InfoPanel.class.getName());
 
@@ -201,6 +201,9 @@ public final class InfoPanel extends JPanel {
         }
     }
 
+    public  String getBase64Image(){
+        return  this.base64Image;
+    }
 
 
     private String convertImageToBase64(NImage image) {
@@ -232,6 +235,19 @@ public final class InfoPanel extends JPanel {
         }
     }
 
+
+    public  boolean isActif(){
+        boolean ok=true;
+
+        String nip = txtNip.getText().trim();
+
+        String matriculeStr = txtMatricule.getText().trim();
+        if(nip.isEmpty() || matriculeStr.isEmpty()){
+            ok=false;
+        }
+        return  ok;
+
+    }
     private void saveInformationToDatabase() {
         // Récupérer les valeurs des champs
         String nip = txtNip.getText().trim();
@@ -299,6 +315,9 @@ public final class InfoPanel extends JPanel {
                 stmt.executeUpdate();
                 logger.info("User info saved successfully!");
                 Utilities.showInformation(this, "Informations enregistrées avec succès !");
+
+               MainFrame mf=new MainFrame();
+               mf.switchToPanel("Mains");
             }
         } catch (Exception e) {
             logger.severe("Error while saving information to database: " + e.getMessage());
