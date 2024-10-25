@@ -14,6 +14,7 @@ import java.time.Instant;
 @Data
 @Component
 public class CreerUserUI extends JPanel {
+    //uuuu
     private JComboBox<String> profilComboBox;
     private JTextField usernameField;
     private JPasswordField passwordField; // Utilisation de JPasswordField pour les mots de passe
