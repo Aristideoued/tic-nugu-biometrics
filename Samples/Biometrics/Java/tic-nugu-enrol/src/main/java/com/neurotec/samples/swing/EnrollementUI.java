@@ -47,7 +47,7 @@ public class EnrollementUI extends JFrame{
         setTitle("Formulaire d'inscription");
         setSize(800, 500); // Augmenter la taille de la fenêtre si nécessaire
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        setVisible(true);
         // Utilisation de GridBagLayout pour disposer correctement les labels et champs
         JPanel panel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();

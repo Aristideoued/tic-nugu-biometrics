@@ -18,8 +18,8 @@ public class CompteDAO {
             pstmt.setLong(2, compte.getUtilisateur().getId());
             pstmt.setString(3, compte.getUsername());
             pstmt.setString(4, hashedPassword);
-            pstmt.setTimestamp(5, compte.getCreateAt());
-            pstmt.setString(6, compte.getCreateBy());
+           // pstmt.setTimestamp(5, compte.getCreateAt());
+           // pstmt.setString(6, compte.getCreateBy());
             pstmt.setBoolean(7, true);
 
             pstmt.executeUpdate();

@@ -225,8 +225,8 @@ public class CreationUtilisateurUI extends JFrame {
                         compte.setUtilisateur(utilisateurRef);  // Lien entre Compte et Utilisateur
                         compte.setUsername(username);
                         compte.setPassword(password);
-                        compte.setCreateBy("Francis");
-                        compte.setCreateAt(Timestamp.valueOf(LocalDateTime.now()));
+                      //  compte.setCreateBy("Francis");
+                      //  compte.setCreateAt(Timestamp.valueOf(LocalDateTime.now()));
                         compte.setFlActivated(true);
 
                         // Étape 4 : Sauvegarder le compte

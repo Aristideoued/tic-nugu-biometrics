@@ -1,12 +1,12 @@
 package com.neurotec.samples.DAO;
 
-
 import com.neurotec.samples.model.Utilisateur;
 
 import java.sql.*;
 import java.time.LocalDateTime;
 
-public class UtilisateurDAO {
+public class UtilisateurDAO
+{
     private final String DB_URL = "jdbc:mysql://localhost:3306/votre_base_de_donnees";
     private final String USER = "root";  // Remplacez par votre utilisateur de base de données
     private final String PASS = "mot_de_passe";  // Remplacez par votre mot de passe
@@ -19,8 +19,7 @@ public class UtilisateurDAO {
             pstmt.setString(3, utilisateur.getPrenom());
             pstmt.setString(4, utilisateur.getTelephone());
             pstmt.setString(5, utilisateur.getEmail());
-            pstmt.setTimestamp(6, utilisateur.getCreateAt());
-            pstmt.setString(7, utilisateur.getCreateBy());
+            pstmt.setString(7, utilisateur.getCreatedBy());
 
             pstmt.executeUpdate();
 

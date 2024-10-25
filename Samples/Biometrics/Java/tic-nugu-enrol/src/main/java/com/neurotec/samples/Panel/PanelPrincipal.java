@@ -4,14 +4,11 @@
  */
 package com.neurotec.samples.Panel;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.JPanel;
 
 /**
  *
@@ -27,7 +24,7 @@ public class PanelPrincipal extends JPanel {
     public PanelPrincipal() {
         try {
             // Charge l'image depuis le fichier
-            backgroundImage = ImageIO.read(new File("assets/biometrie.jpg"));
+            backgroundImage = ImageIO.read(new File("src/main/resources/assets/biometrie.jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -50,7 +47,7 @@ public class PanelPrincipal extends JPanel {
         // Dessine du texte par-dessus l'image de fond
         Font font = new Font("Courier", Font.BOLD, 20);
         g.setFont(font);
-        g.setColor(Color.WHITE);
+        g.setColor(Color.RED);
         g.drawString("SYSTEME D'ENROLEMENT BIOMETRIQUE", 190, 20);
     }
 }
