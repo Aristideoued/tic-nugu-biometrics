@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="RXTXcomm">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/libs/RXTXcomm.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/SigPlus2_68.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/libs/SigPlus2_68.jar!/" />
+    </SOURCES>
+  </library>
+</component>
