@@ -4,6 +4,8 @@ package com.neurotec.samples.ui;
 import com.neurotec.samples.Services.CompteService;
 import com.neurotec.samples.controller.UtilisateurController;
 import com.neurotec.samples.model.Compte;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.swing.*;
@@ -17,7 +19,10 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import lombok.Data;
 @Data
+
 @Component
+@NoArgsConstructor(force = true)
+@AllArgsConstructor
 public class ConsultUserUI  extends JFrame {
 
 

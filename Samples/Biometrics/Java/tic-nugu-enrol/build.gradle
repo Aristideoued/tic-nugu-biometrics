@@ -21,7 +21,9 @@ repositories {
 }
 
 dependencies {
-	// Dépendances existantes
+
+	implementation 'org.postgresql:postgresql:42.6.0'
+
 	implementation 'org.mongodb:mongodb-driver-sync:4.9.1'
 	implementation ":neurotec-core"
 	implementation ":neurotec-licensing"
@@ -34,6 +36,7 @@ dependencies {
 	implementation ":neurotec-devices"
 	implementation ":jna"
 	//implementation "org.mongodb:mongodb-driver-sync:4.3.4"
+
 	implementation 'org.mongodb:mongodb-driver-sync:4.6.1'
 	implementation 'org.mongodb:mongodb-driver-core:4.6.1'
 	implementation project.modules."simple-xml"
@@ -44,6 +47,9 @@ dependencies {
 	implementation 'org.postgresql:postgresql:42.6.0'
 	implementation files('libs/opencv-4100.jar')
 	implementation 'org.slf4j:slf4j-simple:2.0.9'
+
+	implementation 'com.toedter:jcalendar:1.4'
+
 
 	// Dépendances Spring Boot ajoutées
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -66,7 +72,9 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+
 }
+
 
 apply from: "../../../Common/Java/buildCommon/run.gradle"
 

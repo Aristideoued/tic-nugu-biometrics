@@ -31,4 +31,9 @@ public class Compte extends CommonEntity {
 
    @ManyToOne(cascade = CascadeType.ALL)
    public Utilisateur utilisateur;
+
+
+   public Utilisateur getUtilisateur() {
+      return utilisateur;
+   }
 }

@@ -1,232 +1,327 @@
 package com.neurotec.samples.swing.controls;
 
-import java.awt.BorderLayout;
-import java.awt.Frame;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.text.SimpleDateFormat;
+import java.util.Base64;
+import java.util.Date;
+import java.util.logging.Logger;
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
 
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-
+import com.neurotec.samples.swing.MainFrame;
+import com.toedter.calendar.JCalendar;
 import com.neurotec.biometrics.NFace;
 import com.neurotec.biometrics.swing.NFaceView;
 import com.neurotec.images.NImage;
-import com.neurotec.images.NImages;
-import com.neurotec.licensing.NLicense;
 import com.neurotec.samples.Utilities;
 import com.neurotec.samples.enrollment.EnrollmentDataModel;
-import com.neurotec.samples.enrollment.InfoField;
-import com.neurotec.samples.swing.GridBagUtils;
 import com.neurotec.samples.swing.PictureCapturingDialog;
-import com.neurotec.samples.util.Utils;
 
 public final class InfoPanel extends JPanel {
 
-	// ==============================================
-	// Private classes
-	// ==============================================
+    private static final long serialVersionUID = 1L;
+    private static final Logger logger = Logger.getLogger(InfoPanel.class.getName());
 
-	private class PropertyTableModel extends DefaultTableModel {
+    private NFaceView thumbnailImageView;
+    private String base64Image;
 
-		// ==============================================
-		// Private static fields
-		// ==============================================
+    // Champs du formulaire
+    private JTextField txtNip, txtRefPiece, txtTypePiece, txtMatricule, txtNom, txtPrenom, txtNomJF;
+    private JTextField txtTelephone, txtMail, txtLieuNaissance;
+    private JCalendar calendar; // JCalendar pour la date
+    private JComboBox<String> cmbSexe;
+    private JButton btnSave;
+    JButton btnNext;
+    private Frame owner;
 
-		private static final long serialVersionUID = 1L;
+    public InfoPanel(Frame owner) {
+        this.owner = owner;
+        initializeComponents();
+        onModelChanged();
+    }
 
-		// ==============================================
-		// Private fields
-		// ==============================================
+    private void initializeComponents() {
+        setLayout(new BorderLayout());
+        setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+      //  new MainFrame().setBtnStart(false);     // Panes pour séparer la partie formulaire et photo
+        JPanel formPanel = createFormPanel();
+        JPanel imagePanel = createImagePanel();
 
-		private String[] columnNames = {"key", "value"};
-		private List<InfoField> values;
+       // MainFrame mf=new MainFrame();
+       // mf.setBtnStart(false);
 
-		// ==============================================
-		// Private methods
-		// ==============================================
+        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, formPanel, imagePanel);
+        splitPane.setDividerLocation(800);
+        splitPane.setDividerSize(10);
+        add(splitPane, BorderLayout.CENTER);
+    }
 
-		public void clearAllData() {
-			if (getRowCount() > 0) {
-				for (int i = getRowCount() - 1; i > -1; i--) {
-					removeRow(i);
-				}
-			}
-		}
+    private JPanel createFormPanel() {
+        JPanel panel = new JPanel(new GridLayout(0, 2, 50, 10));
+        panel.setBorder(BorderFactory.createTitledBorder("Informations Personnelles"));
 
-		// ==============================================
-		// Public overridden methods
-		// ==============================================
+        // Champs avec labels
+        panel.add(new JLabel("NIP:"));
+        txtNip = new JTextField();
+        panel.add(txtNip);
 
-		@Override
-		public int getColumnCount() {
-			return 2;
-		}
+        panel.add(new JLabel("Référence de la pièce:"));
+        txtRefPiece = new JTextField();
+        panel.add(txtRefPiece);
 
-		@Override
-		public String getColumnName(int column) {
-			try {
-				return columnNames[column];
-			} catch (Exception e) {
-				return super.getColumnName(column);
-			}
-		}
+        panel.add(new JLabel("Type de pièce:"));
+        txtTypePiece = new JTextField();
+        panel.add(txtTypePiece);
 
-		@Override
-		public boolean isCellEditable(int row, int column) {
-			return column == 1;
-		}
+        panel.add(new JLabel("Matricule:"));
+        txtMatricule = new JTextField();
+        panel.add(txtMatricule);
 
-		@Override
-		public void setValueAt(Object aValue, int row, int column) {
-			if (values != null) {
-				values.get(row).setValue(aValue);
-			}
-			super.setValueAt(aValue, row, column);
-		}
+        panel.add(new JLabel("Nom:"));
+        txtNom = new JTextField();
+        panel.add(txtNom);
 
-		public void setValues(List<InfoField> values) {
-			clearAllData();
-			this.values = values;
-			for (InfoField info : values) {
-				addRow(new Object[] {info.getKey(), info.getValue()});
-			}
-		}
-	}
+        panel.add(new JLabel("Prénom:"));
+        txtPrenom = new JTextField();
+        panel.add(txtPrenom);
 
-	// ==============================================
-	// Private static fields
-	// ==============================================
+        panel.add(new JLabel("Nom de jeune fille:"));
+        txtNomJF = new JTextField();
+        panel.add(txtNomJF);
 
-	private static final long serialVersionUID = 1L;
+        panel.add(new JLabel("Téléphone:"));
+        txtTelephone = new JTextField();
+        panel.add(txtTelephone);
 
-	// ==============================================
-	// Private fields
-	// ==============================================
+        panel.add(new JLabel("Email:"));
+        txtMail = new JTextField();
+        panel.add(txtMail);
 
-	private NFaceView thumbnailImageView;
-	private PropertyTableModel tableModel;
+        panel.add(new JLabel("Date de naissance:"));
+        calendar = new JCalendar();
+        panel.add(calendar);
 
-	private final Frame owner;
+        panel.add(new JLabel("Lieu de naissance:"));
+        txtLieuNaissance = new JTextField();
+        panel.add(txtLieuNaissance);
 
-	// ==============================================
-	// Public constructor
-	// ==============================================
+        panel.add(new JLabel("Sexe:"));
+        cmbSexe = new JComboBox<>(new String[]{"Homme", "Femme"});
+        panel.add(cmbSexe);
 
-	public InfoPanel(Frame owner) {
-		this.owner = owner;
-		initializeComponents();
-		onModelChanged();
-	}
+        // Bouton "Enregistrer"
+      /*  btnSave = createCustomButton("Suivant", "Enregistrer les informations");
+        btnSave.setEnabled(false);
+        btnSave.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveInformationToDatabase();
+            }
+        });
+        btnSave.setPreferredSize(new Dimension(150, 40)); // Augmente la hauteur du bouton
+        btnSave.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0)); // 0 pour haut, 20 pour gauche, 0 pour bas, 0 pour droite
 
-	// ==============================================
-	// Private methods
-	// ==============================================
+        panel.add(btnSave);*/
 
-	private void initializeComponents() {
-		setLayout(new BorderLayout());
+        return panel;
+    }
 
-		JPanel thumbnailPanel = new JPanel();
-		GridBagLayout thumbnailPanelLayout = new GridBagLayout();
-		thumbnailPanelLayout.columnWidths = new int[] {90, 92, 95, 85, 5};
-		thumbnailPanelLayout.rowHeights = new int[] {30, 1, 195, 5};
-		thumbnailPanel.setLayout(thumbnailPanelLayout);
+    private JPanel createImagePanel() {
+        JPanel panel = new JPanel(new BorderLayout());
+      //  panel.setPreferredSize(new Dimension(250, 200)); // Ajuste la largeur ici
+        panel.setBorder(BorderFactory.createTitledBorder("Photo d'identité"));
 
-		JButton btnCapture = new JButton("Capture");
-		btnCapture.addActionListener(new ActionListener() {
+        thumbnailImageView = new NFaceView();
+        thumbnailImageView.setAutofit(true); // S'assurer que l'image s'adapte bien
+        panel.add(thumbnailImageView, BorderLayout.CENTER);
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				btnCaptureClick();
-			}
-		});
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JButton btnCapture = createCustomButton("Capturer la Photo", "Capture une photo");
+        btnCapture.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                btnCaptureClick();
+            }
+        });
 
-		JButton btnOpenImage = new JButton("Open image");
-		btnOpenImage.addActionListener(new ActionListener() {
 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				btnOpenClick();
-			}
-		});
+         btnNext = createCustomButton("Suivant", "Enregistrer les informations");
 
-		JLabel lblThumbnailKey = new JLabel("Thumbnail");
-		thumbnailImageView = new NFaceView();
-		thumbnailImageView.setAutofit(true);
-		thumbnailImageView.setFace(EnrollmentDataModel.getInstance().getThumbFace());
+        btnNext.setEnabled(false);
+        btnNext.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                saveInformationToDatabase();
+            }
+        });
+        btnNext.setPreferredSize(new Dimension(150, 40)); // Augmente la hauteur du bouton
+        btnNext.setBorder(BorderFactory.createEmptyBorder(0, 50, 0, 0)); // 0 pour haut, 20 pour gauche, 0 pour bas, 0 pour droite
+        btnNext.setEnabled(false);
+        buttonPanel.add(btnCapture);
+        buttonPanel.add(btnNext);
+        panel.add(buttonPanel, BorderLayout.SOUTH);
 
-		tableModel = new PropertyTableModel();
-		JTable propertyTable = new JTable(tableModel);
-		propertyTable.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
+        return panel;
+    }
 
-		GridBagUtils leftPanelGridBagUtils = new GridBagUtils(GridBagConstraints.BOTH);
-		leftPanelGridBagUtils.setInsets(new Insets(2, 2, 2, 2));
-		leftPanelGridBagUtils.addToGridBagLayout(0, 0, 1, 1, 20, 0, thumbnailPanel, lblThumbnailKey);
-		leftPanelGridBagUtils.addToGridBagLayout(2, 0, 1, 1, 1, 0, thumbnailPanel, btnCapture);
-		leftPanelGridBagUtils.addToGridBagLayout(3, 0, 1, 1, 1, 0, thumbnailPanel, btnOpenImage);
-		leftPanelGridBagUtils.addToGridBagLayout(0, 1, thumbnailPanel, new JLabel());
-		leftPanelGridBagUtils.addToGridBagLayout(0, 2, 4, 1, 1, 1, thumbnailPanel, new JScrollPane(thumbnailImageView));
+    private void btnCaptureClick() {
+        if (EnrollmentDataModel.getInstance().getBiometricClient().getFaceCaptureDevice() == null) {
+            Utilities.showInformation(this, "Aucune caméra détectée. Connectez une caméra et réessayez.");
+            return;
+        }
 
-		JSplitPane infoSplitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, thumbnailPanel, propertyTable);
-		infoSplitPane.setDividerLocation(365);
-		infoSplitPane.setResizeWeight(.385);
-		infoSplitPane.setEnabled(false);
-		add(infoSplitPane);
-	}
+        PictureCapturingDialog form = new PictureCapturingDialog(owner);
+        form.setVisible(true);
 
-	private void btnOpenClick() {
-		JFileChooser openFileDialog = new JFileChooser();
-		openFileDialog.addChoosableFileFilter(new Utils.ImageFileFilter(NImages.getOpenFileFilterString(true, false)));
-		if (openFileDialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-			try {
-				NImage image = NImage.fromFile(openFileDialog.getSelectedFile().getPath());
-				NFace face = new NFace();
-				face.setImage(image);
-				EnrollmentDataModel.getInstance().setThumbFace(face);
-				thumbnailImageView.setFace(face);
-			} catch (Exception e) {
-				Utilities.showError(this, e);
-			}
-		}
-	}
+        // Mettre à jour le visage capturé
+        NFace capturedFace = EnrollmentDataModel.getInstance().getThumbFace();
+        if (capturedFace != null) {
 
-	private void btnCaptureClick() {
-		if (EnrollmentDataModel.getInstance().getBiometricClient().getFaceCaptureDevice() == null) {
-			Utilities.showInformation(this, "No cameras connected. Please connect camera and try again");
-			return;
-		}
+            btnNext.setEnabled(true);
+            logger.info("Captured face: not null");
+            thumbnailImageView.setFace(capturedFace); // Prévisualiser l'image capturée
 
-		PictureCapturingDialog form = new PictureCapturingDialog(owner);
-		form.setVisible(true);
-		thumbnailImageView.setFace(EnrollmentDataModel.getInstance().getThumbFace());
-	}
+            // Convertir l'image capturée en Base64
+            NImage image = capturedFace.getImage();
+            base64Image = convertImageToBase64(image);
+            logger.info("Captured image converted to Base64: " + base64Image);
 
-	// ==============================================
-	// Public methods
-	// ==============================================
+            // Repeindre le composant pour assurer que l'image s'affiche
+            thumbnailImageView.repaint();
+            thumbnailImageView.revalidate();
+        } else {
+            logger.warning("Aucun visage capturé.");
+        }
+    }
 
-	public void onModelChanged() {
-		List<InfoField> editableInfo = new ArrayList<InfoField>();
-		for (InfoField i : EnrollmentDataModel.getInstance().getInfo()) {
-			if (i.isShowAsThumbnail()) {
-				continue;
-			}
-			editableInfo.add(i);
-		}
-		thumbnailImageView.setFace(EnrollmentDataModel.getInstance().getThumbFace());
-		tableModel.setValues(editableInfo);
 
-	}
 
+    private String convertImageToBase64(NImage image) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            java.awt.Image awtImage = image.toImage();
+            java.awt.image.BufferedImage bufferedImage = new java.awt.image.BufferedImage(
+                    awtImage.getWidth(null),
+                    awtImage.getHeight(null),
+                    java.awt.image.BufferedImage.TYPE_INT_ARGB
+            );
+
+            java.awt.Graphics2D g2d = bufferedImage.createGraphics();
+            g2d.drawImage(awtImage, 0, 0, null);
+            g2d.dispose();
+
+            logger.info("Attempting to write image to ByteArrayOutputStream.");
+            boolean writeSuccess = javax.imageio.ImageIO.write(bufferedImage, "PNG", baos);
+            if (!writeSuccess) {
+                logger.warning("ImageIO.write returned false.");
+            }
+
+            byte[] imageBytes = baos.toByteArray();
+            logger.info("Image converted to byte array of length: " + imageBytes.length);
+            return Base64.getEncoder().encodeToString(imageBytes);
+        } catch (IOException e) {
+            logger.severe("Exception occurred while converting image to Base64: " + e.getMessage());
+            return null;
+        }
+    }
+
+    private void saveInformationToDatabase() {
+        // Récupérer les valeurs des champs
+        String nip = txtNip.getText().trim();
+        String refPiece = txtRefPiece.getText().trim();
+        String typePiece = txtTypePiece.getText().trim();
+        String matriculeStr = txtMatricule.getText().trim();
+        String nom = txtNom.getText().trim();
+        String prenom = txtPrenom.getText().trim();
+        String nomJF = txtNomJF.getText().trim();
+        String telephone = txtTelephone.getText().trim();
+        String mail = txtMail.getText().trim();
+        Date dateNaissance = calendar.getDate(); // Obtenir la date sélectionnée
+        String lieuNaissance = txtLieuNaissance.getText().trim();
+        String sexe = (String) cmbSexe.getSelectedItem();
+
+        // Vérifications des champs obligatoires
+        if (nip.isEmpty()) {
+            Utilities.showError(this, "Le NIP est obligatoire !");
+            return;
+        }
+        if (matriculeStr.isEmpty()) {
+            Utilities.showError(this, "Le matricule est obligatoire !");
+            return;
+        }
+        if (base64Image == null || base64Image.isEmpty()) {
+            Utilities.showError(this, "Veuillez capturer une image avant d'enregistrer !");
+            return;
+        }
+
+        // Convertir le matricule en entier
+        int matricule;
+        try {
+            matricule = Integer.parseInt(matriculeStr);
+        } catch (NumberFormatException e) {
+            Utilities.showError(this, "Le matricule doit être un nombre valide !");
+            return;
+        }
+
+        // Connexion à la base de données
+        String dbUrl = "jdbc:postgresql://localhost:5432/tic-nugu";
+        String dbUser = "postgres";
+        String dbPassword = "2885351";
+
+        try (Connection conn = DriverManager.getConnection(dbUrl, dbUser, dbPassword)) {
+            String sql = "INSERT INTO utilisateur_info (nip, refPiece, typePiece, matricule, nom, prenom, nomJF, " +
+                    "telephone, mail, dateNaissance, lieuNaissance, sexe, photo) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+                stmt.setString(1, nip);
+                stmt.setString(2, refPiece);
+                stmt.setString(3, typePiece);
+                stmt.setInt(4, matricule);
+                stmt.setString(5, nom);
+                stmt.setString(6, prenom);
+                stmt.setString(7, nomJF);
+                stmt.setString(8, telephone);
+                stmt.setString(9, mail);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); // Format de la date
+                stmt.setString(10, sdf.format(dateNaissance)); // Formater la date
+                stmt.setString(11, lieuNaissance);
+                stmt.setString(12, sexe);
+                stmt.setString(13, base64Image); // Stocker l'image en base64
+
+                stmt.executeUpdate();
+                logger.info("User info saved successfully!");
+                Utilities.showInformation(this, "Informations enregistrées avec succès !");
+            }
+        } catch (Exception e) {
+            logger.severe("Error while saving information to database: " + e.getMessage());
+            Utilities.showError(this, "Erreur lors de l'enregistrement des informations !");
+        }
+    }
+
+    private JButton createCustomButton(String text, String toolTipText) {
+        JButton btn = new JButton(text);
+        btn.setFont(new Font("Arial", Font.PLAIN, 12));
+        btn.setPreferredSize(new Dimension(150, 35));
+        btn.setBackground(Color.BLUE); // Set button color to blue
+        btn.setForeground(Color.WHITE);
+        btn.setToolTipText(toolTipText);
+        return btn;
+    }
+
+    public void onModelChanged() {
+        NFace thumbFace = EnrollmentDataModel.getInstance().getThumbFace();
+        if (thumbFace != null) {
+            thumbnailImageView.setFace(thumbFace);
+            base64Image = convertImageToBase64(thumbFace.getImage());
+            logger.info("Thumbnail image updated from model.");
+        }
+    }
 }
