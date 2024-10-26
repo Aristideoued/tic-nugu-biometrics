@@ -4,10 +4,7 @@
  */
 package com.neurotec.samples.ui;
 
-import com.neurotec.samples.Panel.PanelPrincipal;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import java.awt.event.ActionEvent;
@@ -26,7 +23,7 @@ import javax.swing.JMenuItem;
 @AllArgsConstructor
 public class PrincipalUIZZZ  extends JFrame{
 
-    private JButton bouton = new JButton("bouton1");
+  /*  private JButton bouton = new JButton("bouton1");
     private JMenuBar menuBar = new JMenuBar();
     private JMenu test1 = new JMenu("Initialisation");
     private JMenu test2 = new JMenu("Help");
@@ -91,7 +88,7 @@ public class PrincipalUIZZZ  extends JFrame{
         item5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new EnrolementUI();
+                new EnrolementUI(principalUI);
             }
         });
 
@@ -105,9 +102,9 @@ public class PrincipalUIZZZ  extends JFrame{
 
 
 
-        this.setVisible(true);
+      //  this.setVisible(true);
 
 
-    }
+    //}
 
 }

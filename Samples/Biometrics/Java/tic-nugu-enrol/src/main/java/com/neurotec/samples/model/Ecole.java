@@ -5,10 +5,9 @@
  ***********************************************************************/
 package com.neurotec.samples.model;
 
-import com.neurotec.samples.model.Province;
 import lombok.*;
-import javax.persistence.*;
 
+import javax.persistence.*;
 
 @Getter
 @Setter

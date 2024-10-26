@@ -1,6 +1,5 @@
 package com.neurotec.samples.ui;
 
-
 import lombok.Data;
 import org.springframework.stereotype.Component;
 
@@ -29,72 +28,99 @@ public class DetailProfilUI extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Créer le panel principal
+        // Création du panneau principal
         JPanel panel = new JPanel();
         panel.setLayout(new GridBagLayout());
+        panel.setBackground(Color.WHITE); // Fond blanc pour le panneau principal
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(10, 10, 10, 10); // Marges
+        gbc.insets = new Insets(10, 10, 10, 10);
 
-        // Champs pour afficher les informations utilisateur
+        // Style de base pour les étiquettes
+        Font labelFont = new Font("Arial", Font.BOLD, 14);
+        Font valueFont = new Font("Arial", Font.PLAIN, 14);
+
+        // Création et disposition des champs d'affichage des informations utilisateur
         gbc.gridx = 0;
         gbc.gridy = 0;
-        panel.add(new JLabel("Nom d'utilisateur:"), gbc);
-        usernameLabel = new JLabel();
+        panel.add(createStyledLabel("Nom d'utilisateur:", labelFont), gbc);
+        usernameLabel = createStyledValueLabel(valueFont);
         gbc.gridx = 1;
         panel.add(usernameLabel, gbc);
 
         gbc.gridx = 0;
         gbc.gridy++;
-        panel.add(new JLabel("Profil:"), gbc);
-        profilLabel = new JLabel();
+        panel.add(createStyledLabel("Profil:", labelFont), gbc);
+        profilLabel = createStyledValueLabel(valueFont);
         gbc.gridx = 1;
         panel.add(profilLabel, gbc);
 
         gbc.gridx = 0;
         gbc.gridy++;
-        panel.add(new JLabel("Matricule:"), gbc);
-        matriculeLabel = new JLabel();
+        panel.add(createStyledLabel("Matricule:", labelFont), gbc);
+        matriculeLabel = createStyledValueLabel(valueFont);
         gbc.gridx = 1;
         panel.add(matriculeLabel, gbc);
 
         gbc.gridx = 0;
         gbc.gridy++;
-        panel.add(new JLabel("Nom:"), gbc);
-        nomLabel = new JLabel();
+        panel.add(createStyledLabel("Nom:", labelFont), gbc);
+        nomLabel = createStyledValueLabel(valueFont);
         gbc.gridx = 1;
         panel.add(nomLabel, gbc);
 
         gbc.gridx = 0;
         gbc.gridy++;
-        panel.add(new JLabel("Prénom:"), gbc);
-        prenomLabel = new JLabel();
+        panel.add(createStyledLabel("Prénom:", labelFont), gbc);
+        prenomLabel = createStyledValueLabel(valueFont);
         gbc.gridx = 1;
         panel.add(prenomLabel, gbc);
 
         gbc.gridx = 0;
         gbc.gridy++;
-        panel.add(new JLabel("Téléphone:"), gbc);
-        telephoneLabel = new JLabel();
+        panel.add(createStyledLabel("Téléphone:", labelFont), gbc);
+        telephoneLabel = createStyledValueLabel(valueFont);
         gbc.gridx = 1;
         panel.add(telephoneLabel, gbc);
 
         gbc.gridx = 0;
         gbc.gridy++;
-        panel.add(new JLabel("Email:"), gbc);
-        emailLabel = new JLabel();
+        panel.add(createStyledLabel("Email:", labelFont), gbc);
+        emailLabel = createStyledValueLabel(valueFont);
         gbc.gridx = 1;
         panel.add(emailLabel, gbc);
 
-        // Bouton de fermeture
+        // Bouton de fermeture avec style amélioré
         closeButton = new JButton("Fermer");
-        closeButton.addActionListener(e -> dispose()); // Fermer la fenêtre
+        closeButton.setBackground(new Color(0, 123, 255)); // Couleur gris Bootstrap
+        closeButton.setForeground(Color.WHITE); // Texte blanc (ou noir si vous préférez)
+        closeButton.setFocusPainted(false);
+        closeButton.setOpaque(true);
+        closeButton.setFocusPainted(false);
+        closeButton.setBorder(BorderFactory.createEmptyBorder(10, 25, 10, 25));
+        closeButton.setFont(new Font("Arial", Font.BOLD, 14));
+        closeButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        closeButton.addActionListener(e -> dispose());
 
         gbc.gridx = 0;
         gbc.gridy++;
         gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
         panel.add(closeButton, gbc);
 
         add(panel);
     }
 
+    private JLabel createStyledLabel(String text, Font font) {
+        JLabel label = new JLabel(text);
+        label.setFont(font);
+        label.setForeground(new Color(0, 123, 255)); // Couleur Bootstrap blue pour le texte des labels
+        return label;
+    }
+
+    private JLabel createStyledValueLabel(Font font) {
+        JLabel label = new JLabel();
+        label.setFont(font);
+        label.setForeground(Color.DARK_GRAY); // Couleur grise pour les valeurs
+        return label;
+    }
 }

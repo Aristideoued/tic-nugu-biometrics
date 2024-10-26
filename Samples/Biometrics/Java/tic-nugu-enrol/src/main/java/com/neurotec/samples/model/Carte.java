@@ -5,8 +5,9 @@
  ***********************************************************************/
 package com.neurotec.samples.model;
 
-import javax.persistence.*;
 import lombok.*;
+
+import javax.persistence.*;
 import java.sql.Blob;
 import java.util.*;
 
@@ -39,4 +40,67 @@ public class Carte extends CommonEntity {
    private String motifDesactivation;
    private Date dateValidite;
 
+   public Long getId() {
+      return id;
+   }
+
+   public String getNip() {
+      return nip;
+   }
+
+   public Integer getMatricule() {
+      return matricule;
+   }
+
+   public String getNom() {
+      return nom;
+   }
+
+   public String getPrenom() {
+      return prenom;
+   }
+
+   public String getNomJF() {
+      return nomJF;
+   }
+
+   public Date getDateNaissance() {
+      return dateNaissance;
+   }
+
+   public String getLieuNaissance() {
+      return lieuNaissance;
+   }
+
+   public String getSexe() {
+      return sexe;
+   }
+
+   public String getEmploi() {
+      return emploi;
+   }
+
+   public Blob getSignatureAgent() {
+      return signatureAgent;
+   }
+
+   public Blob getSignatureAutorite() {
+      return signatureAutorite;
+   }
+
+   public String getPosition() {
+      return position;
+   }
+
+   public Boolean getfActive() {
+      return fActive;
+   }
+
+   public String getMotifDesactivation() {
+      return motifDesactivation;
+   }
+
+   public Date getDateValidite() {
+      return dateValidite;
+   }
 }

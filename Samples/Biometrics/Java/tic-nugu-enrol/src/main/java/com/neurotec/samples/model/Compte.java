@@ -28,6 +28,7 @@ public class Compte extends CommonEntity {
 
    @ManyToOne
    public Profil profil;
+
    @ManyToOne(cascade = CascadeType.ALL)
    public Utilisateur utilisateur;
 }

@@ -5,9 +5,13 @@
  ***********************************************************************/
 package com.neurotec.samples.model;
 
-import javax.persistence.*;
 
 import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Getter
 @Setter

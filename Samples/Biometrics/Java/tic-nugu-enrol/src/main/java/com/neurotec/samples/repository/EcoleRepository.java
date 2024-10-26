@@ -1,5 +1,6 @@
 package com.neurotec.samples.repository;
 
+
 import com.neurotec.samples.model.Ecole;
 import com.neurotec.samples.model.Province;
 import org.springframework.data.jpa.repository.JpaRepository;

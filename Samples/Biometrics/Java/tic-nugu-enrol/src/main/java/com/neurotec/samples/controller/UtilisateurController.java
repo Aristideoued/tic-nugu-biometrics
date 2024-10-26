@@ -38,12 +38,6 @@ public class UtilisateurController {
     private PrincipalUI principalUI;
     private SessionManager sessionManager;
     private ConsultUserUI consultUserUI;
-  /* private JTable table;
-    private DefaultTableModel tableModel;
-    private TableRowSorter<DefaultTableModel> sorter;*/
-
-
-
 
     public Compte creerUser(Compte compte){
         System.out.println("creer user:"+compte);
@@ -76,23 +70,6 @@ public class UtilisateurController {
                 changerMotDePasse();
             }
         });
-       // deleteButton
-      /*   consultUserUI.getDeleteButton().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                int selectedRow = table.getSelectedRow();
-                if (selectedRow != -1) {
-                    Long compteId = (Long) tableModel.getValueAt(table.convertRowIndexToModel(selectedRow), 0);
-                    int utilisateurId = (int) tableModel.getValueAt(table.convertRowIndexToModel(selectedRow), 1);
-                    deleteFromDatabase(compteId);
-                    tableModel.removeRow(table.convertRowIndexToModel(selectedRow));
-                } else {
-                    JOptionPane.showMessageDialog(null, "Veuillez sélectionner une ligne à supprimer.");
-                }
-            }
-
-        });*/
 
         principalUI.getMonprofil().addActionListener(new ActionListener() {
             @Override
@@ -100,26 +77,16 @@ public class UtilisateurController {
                 loadUserDetails();
             }
         });
-
-
     }
-        private void supprimer(){
 
-
-         }
-   /*   public List<Compte> loadAll(){
-       return compteService.findAllCompte();
-    }*/
-
-
-    public void loadAll(){
-
+    public List<Compte> loadAll(){
         List<Compte> compteAll=compteService.findAllCompte();
-        //consultUserUI.loadAll(compteAll);
+       return compteAll;
     }
     public void loadProfils() {
         List<Profil> profils = profilService.findProfils();
         if (profils != null && !profils.isEmpty()) {
+            creerUserUI.getProfilComboBox().addItem("Selectionner un profil");
             for (Profil profil : profils) {
                 creerUserUI.getProfilComboBox().addItem(profil.getLibelle());
             }
@@ -150,6 +117,16 @@ public class UtilisateurController {
             creerUserUI.getTelephoneErrorLabel().setText("Le numéro de téléphone doit contenir 8 chiffres.");
             creerUserUI.getTelephoneErrorLabel().setVisible(true); // Afficher le message d'erreur
             valid = false; // Indiquer que la validation a échoué
+        }
+
+        if (libelle=="Selectionner un profil") {
+            JOptionPane.showMessageDialog(creerUserUI, "Veuillez selectionner un profil pour l'utilisateur.", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+            valid = false; // Indiquer que la validation a échoué
+        }
+        else if(!ValidateFieldForm.validatePassword(password)) {
+            if (ValidateFieldForm.validateEmail(email))
+                JOptionPane.showMessageDialog(creerUserUI, "Le mot de passe doit contenir 8 caractères avec moins une lettre, un chiffre et un caractère spécial", "Erreur de saisie", JOptionPane.ERROR_MESSAGE);
+            valid = false;
         }
 
         if (!ValidateFieldForm.validateUsername(username)) {
@@ -208,8 +185,6 @@ public class UtilisateurController {
         /// utilisateurController.creerUser(compte);
          creerUser(compte);
         JOptionPane.showMessageDialog(null, "Utilisateur et compte créés avec succès !");
-       // creerUserUI.dispose();
-        //consultUserUI.getTableModel().setRowCount(0);
         consultUserUI.refreshTable();
         consultUserUI.setVisible(true);
 
@@ -220,7 +195,7 @@ public class UtilisateurController {
 
         String currentPassword = new String(changePasswordUI.getPasswordField().getText());
         String newPassword = new String(changePasswordUI.getNewPasswordField().getText());
-        Long compteId = 1L;
+        Long compteId = sessionManager.getUtilisateurCourant().getId();
         boolean isPasswordChanged = compteService.changePassword(compteId, currentPassword, newPassword);
         if (isPasswordChanged) {
             JOptionPane.showMessageDialog(null, "Mot de passe changé avec succès !");

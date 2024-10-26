@@ -84,6 +84,12 @@ public class CompteServiceImpl implements CompteService {
     }
 
     @Override
+    public List<Compte> findActiveComptes() {
+        // Utiliser la méthode du repository pour récupérer les comptes actifs
+        return compteRepository.findByFlActivatedTrue();
+    }
+
+    @Override
     public Compte findById(Long id) {
 
         return compteRepository.findById(id).orElse(null);
@@ -96,14 +102,15 @@ public class CompteServiceImpl implements CompteService {
     }
 
     @Override
-    public boolean changePassword(Long compteId, String currentPassword, String newPassword) {
+    public boolean changePassword(Long id, String currentPassword, String newPassword) {
         // Trouver le compte
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        Optional<Compte> optionalCompte = compteRepository.findById(compteId);
+        Optional<Compte> optionalCompte = compteRepository.findById(id);
         if (optionalCompte.isPresent()) {
             Compte compte = optionalCompte.get();
-
             // Vérifier si le mot de passe actuel est correct
+            System.out.println("mot de passe actuel:"+compte.getPassword());
+            System.out.println("mot de passe saisi:"+currentPassword);
             if (passwordEncoder.matches(currentPassword, compte.getPassword())) {
                 // Mettre à jour le mot de passe
                 compte.setPassword(passwordEncoder.encode(newPassword));
@@ -112,5 +119,25 @@ public class CompteServiceImpl implements CompteService {
             }
         }
         return false;  // Le mot de passe actuel est incorrect ou le compte n'existe pas
+    }
+
+    // reintitialisation de mot de passe
+    @Override
+    public boolean resetPassword(Long compteId) {
+        // Trouver le compte par son ID
+        Optional<Compte> optionalCompte = compteRepository.findById(compteId);
+        if (optionalCompte.isPresent()) {
+            Compte compte = optionalCompte.get();
+            // Générer un nouveau mot de passe aléatoire
+            String newPassword = "BiometrieDefault";
+            // Encoder le nouveau mot de passe
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String encodedNewPassword = passwordEncoder.encode(newPassword);
+            compte.setPassword(encodedNewPassword);
+            // Enregistrer le nouveau mot de passe dans la base de données
+            compteRepository.save(compte);
+            return true; // Réinitialisation réussie
+        }
+        return false; // Compte non trouvé
     }
 }

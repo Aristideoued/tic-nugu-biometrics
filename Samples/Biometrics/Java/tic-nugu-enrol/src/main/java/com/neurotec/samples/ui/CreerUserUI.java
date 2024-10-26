@@ -14,7 +14,6 @@ import java.time.Instant;
 @Data
 @Component
 public class CreerUserUI extends JPanel {
-    //uuuu
     private JComboBox<String> profilComboBox;
     private JTextField usernameField;
     private JPasswordField passwordField; // Utilisation de JPasswordField pour les mots de passe
@@ -29,6 +28,7 @@ public class CreerUserUI extends JPanel {
     private JLabel usernameErrorLabel; // Pour afficher l'erreur d'email
     private JLabel nomErrorLabel; // Pour afficher l'erreur de téléphone
     private JLabel prenomErrorLabel; // Pour afficher l'erreur d'email
+    private JLabel passwordErrorLabel;
     private JButton createButton = new JButton("Créer Utilisateur");
     private JButton cancelButton = new JButton("Annuler");
     ////private UtilisateurController utilisateurController;
@@ -61,14 +61,25 @@ public class CreerUserUI extends JPanel {
         prenomErrorLabel.setForeground(Color.RED);
         prenomErrorLabel.setVisible(false);
 
+        passwordErrorLabel = new JLabel("");
+        passwordErrorLabel.setForeground(Color.RED);
+        passwordErrorLabel.setVisible(false);
+
+
         // Créer le this principal
 //        Jthis this = new Jthis();
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(10, 10, 10, 10); // Marges
 
-        // Couleur de fond
-        // this.setBackground(new Color(44, 44, 73)); // Une couleur lavande claire
+        this.setBorder(BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(Color.BLACK, 1),
+                "Formulaire d'inscription"
+        ));
+        // Alignement à gauche des labels
+        gbc.anchor = GridBagConstraints.WEST;
+        // Encadrer le formulaire avec une bordure
+        this.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1)); // Bordure simple noire
 
         // Champs pour Profil
         gbc.gridx = 0;
@@ -153,10 +164,12 @@ public class CreerUserUI extends JPanel {
         gbc.gridx = 0;
         gbc.gridy++;
         this.add(new JLabel("Mot de passe:"), gbc);
-
         passwordField = new JPasswordField(15); // Utilisation d'un JPasswordField
         gbc.gridx = 1;
         this.add(passwordField, gbc);
+        gbc.gridx = 1;
+        gbc.gridy++;
+        this.add(passwordErrorLabel, gbc);
 
         // Bouton de création
         // Appliquer les styles au bouton "Primary" (Bootstrap btn-primary)
@@ -180,10 +193,6 @@ public class CreerUserUI extends JPanel {
         createButton.setPreferredSize(buttonSize);
         cancelButton.setPreferredSize(buttonSize);
 
-        // Ajouter les boutons à la fenêtre
-        //setLayout(new FlowLayout());
-       // add(createButton);
-       // add(cancelButton);
 
         gbc.gridx = 0;
         gbc.gridy++;
@@ -237,22 +246,22 @@ public class CreerUserUI extends JPanel {
         compte.setFlActivated(true);
         System.out.println("User:"+ utilisateur);
 
-       ////// utilisateurController.creerUser(compte);
         JOptionPane.showMessageDialog(null, "Utilisateur et compte créés avec succès !");
 //        dispose();
 
     }
 
-    /*public void loadProfils() {
-        List<Profil> profils = profilService.findProfils();
-        if (profils != null && !profils.isEmpty()) {
-            for (Profil profil : profils) {
-                profilComboBox.addItem(profil.getLibelle());
-            }
-        } else {
-            System.out.println("Aucun profil disponible !");
-        }
-    }*/
+    public void resetForm() {
+        // Réinitialiser les champs de texte
+        profilComboBox.setSelectedItem(false);
+        usernameField.setText("");
+        matriculeField.setText("");
+        nomField.setText("");
+        prenomField.setText("");
+        telephoneField.setText("");
+        emailField.setText("");
+        passwordField.setText("");
+    }
 
 
 }

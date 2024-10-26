@@ -20,9 +20,14 @@ public interface CompteService {
 
     Page<Compte> findAll(Pageable pageable);
     List<Compte> findAllCompte();
+
+    List<Compte> findActiveComptes();
+
     Compte findById(Long id);
 
     void delete(Long id);
 
     boolean changePassword(Long compteId, String currentPassword, String newPassword);
+
+    boolean resetPassword(Long compteId);
 }

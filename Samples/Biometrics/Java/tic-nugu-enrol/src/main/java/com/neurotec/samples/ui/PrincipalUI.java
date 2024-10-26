@@ -1,6 +1,7 @@
 
 package com.neurotec.samples.ui;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import lombok.AllArgsConstructor;
@@ -9,6 +10,7 @@ import lombok.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -48,8 +50,8 @@ public class PrincipalUI extends JFrame {
 
     JMenuItem recepisseItem = new JMenuItem("Générer un récépissé");
     JMenu initialiserMenu = new JMenu("Initialiser");
-    JMenu helpMenu = new JMenu("Help");
-    JMenu enrolerMenu = new JMenu("Enroller");
+    JMenu helpMenu = new JMenu("Aide");
+    JMenu enrolerMenu = new JMenu("Enrôler");
     JMenu consulterMenu = new JMenu("Consulter");
     JMenu utilisateurMenu = new JMenu("Utilisateur");
     JMenu parametreMenu = new JMenu("Paramètre");
@@ -81,35 +83,36 @@ public class PrincipalUI extends JFrame {
         popupMenu.add(logout);
     }
 
-    public JMenuItem getCreer() {
-        return creer;
-    }
-    public JMenuItem getChangepassword() {
-        return changepassword;
-    }
+//    public JMenuItem getCreer() {
+//        return creer;
+//    }
+//    public JMenuItem getChangepassword() {
+//        return changepassword;
+//    }
+//
+//    public JMenuItem getUtilisateurs() {
+//        return utilisateurs;
+//    }
+//
+//    public JMenuItem getMonprofil() {
+//        return monprofil;
+//    }
+//
+//    public JMenuItem getLogout() {
+//        return logout;
+//    }
+//
+//    public void setProfilButton(JButton profilButton) {
+//        this.profilButton = profilButton;
+//    }
+//    public void setTextProfilButton(String libelle) {
+//        this.profilButton.setText(libelle);
+//    }
+//
+//    public JButton getProfilButton() {
+//        return profilButton;
+//    }
 
-    public JMenuItem getUtilisateurs() {
-        return utilisateurs;
-    }
-
-    public JMenuItem getMonprofil() {
-        return monprofil;
-    }
-
-    public JMenuItem getLogout() {
-        return logout;
-    }
-
-    public void setProfilButton(JButton profilButton) {
-        this.profilButton = profilButton;
-    }
-    public void setTextProfilButton(String libelle) {
-        this.profilButton.setText(libelle);
-    }
-
-    public JButton getProfilButton() {
-        return profilButton;
-    }
     public void principal(){
         setTitle("TicNugu");
 
@@ -123,11 +126,22 @@ public class PrincipalUI extends JFrame {
         c = getContentPane(); // récupération du conteneur principal
         c.setLayout(new BorderLayout());
 
-
         JPanel nord = new JPanel();
         JPanel centre = new JPanel();
         JPanel sud = new JPanel();
-        this.currentPanel = new JPanel(new BorderLayout());
+        currentPanel = new JPanel(new BorderLayout()){
+            // Surcharge de la méthode paintComponent pour dessiner une image de fond
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                try {
+                    Image backgroundImage = ImageIO.read(new File("src/main/resources/biometrie_background_1.jpg"));
+                    g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
         c.add(nord,BorderLayout.NORTH);
         c.add(centre,BorderLayout.CENTER);
         c.add(sud,BorderLayout.SOUTH);
@@ -152,7 +166,7 @@ public class PrincipalUI extends JFrame {
         appTitleCentre.add(appTitleCentreWest);
         appTitleCentre.add(appTitleCentreCentre);
         appTitleCentre.add(appTitleCentreEst);
-        appTitleSud.setBackground(Color.GREEN);
+        appTitleSud.setBackground(new Color(239, 51, 64)); // couleur de la bande rouge
         appTitleSud.setPreferredSize(new Dimension(nord.getWidth(), 8));
         nord.add(appTitleCentre, BorderLayout.CENTER);
         nord.add(appTitleSud, BorderLayout.SOUTH);
@@ -160,15 +174,17 @@ public class PrincipalUI extends JFrame {
         sud.setLayout(new FlowLayout(FlowLayout.TRAILING));
         syncButton.setIcon(colorizeIcon(syncButtonIcon, Color.WHITE));
         exportButton.setIcon(colorizeIcon(exportButtonIcon, Color.WHITE));
-        syncButton.setBackground(new Color(70, 130, 180));
-        exportButton.setBackground(new Color(70, 130, 180));
+        syncButton.setBackground(new Color(0, 151, 57));
+        exportButton.setBackground(new Color(0, 151, 57));
+        syncButton.setForeground(Color.WHITE);
+        exportButton.setForeground(Color.WHITE);
         sud.add(syncButton);
         sud.add(exportButton);
 
         centre.setLayout(new BorderLayout());
         JMenuBar menuBar = new JMenuBar();
-        menuBar.setBackground(new Color(70, 130, 180));
-       
+        menuBar.setBackground(new Color(0, 151, 57));
+
         profilButton.setBorder(null);
         profilButton.setBackground(null);
         profilButton.setFocusPainted(false);
@@ -184,13 +200,21 @@ public class PrincipalUI extends JFrame {
         ImageIcon profilIcon = new ImageIcon(resizeImage(Objects.requireNonNull(convertSvgToPng("src/main/resources/svgs/solid/user.svg")), 20, 20 ));
 
         initialiserMenu.setIcon(colorizeIcon(initialiserIcon, Color.WHITE));
+        initialiserMenu.setForeground(Color.WHITE);
         enrolerMenu.setIcon(colorizeIcon(enrolerIcon, Color.WHITE));
+        enrolerMenu.setForeground(Color.WHITE);
         consulterMenu.setIcon(colorizeIcon(consulterIcon, Color.WHITE));
+        consulterMenu.setForeground(Color.WHITE);
         rapportMenu.setIcon(colorizeIcon(rapportIcon, Color.WHITE));
+        rapportMenu.setForeground(Color.WHITE);
         utilisateurMenu.setIcon(colorizeIcon(utilisateurIcon, Color.WHITE));
+        utilisateurMenu.setForeground(Color.WHITE);
         parametreMenu.setIcon(colorizeIcon(parametreIcon, Color.WHITE));
+        parametreMenu.setForeground(Color.WHITE);
         helpMenu.setIcon(colorizeIcon(helpIcon, Color.WHITE));
+        helpMenu.setForeground(Color.WHITE);
         profilButton.setIcon(colorizeIcon(profilIcon, Color.WHITE));
+        profilButton.setForeground(Color.WHITE);
 
         initialiserMenu.add(lancerItem);
         initialiserMenu.add(arretItem);
@@ -209,10 +233,6 @@ public class PrincipalUI extends JFrame {
         utilisateurMenu.add(creer);
         utilisateurMenu.add(utilisateurs);
 
-//        profilButton.add(monprofil);
-//        profilButton.add(changepassword);
-//        profilButton.add(logout);
-
         rapportMenu.add(recepisseItem);
 
         menuBar.add(initialiserMenu);
@@ -227,7 +247,7 @@ public class PrincipalUI extends JFrame {
         menuBar.setBorder(null);
 
         JPanel centreNord = new JPanel(new BorderLayout());
-        centreNord.setBackground(new Color(70, 130, 180));
+        centreNord.setBackground(new Color(0, 151, 57));
         centreNord.add(menuBar, BorderLayout.CENTER);
         centreNord.add(profilButton, BorderLayout.EAST);
         profilButton.setPreferredSize(new Dimension(90, menuBar.getHeight()));
@@ -242,12 +262,12 @@ public class PrincipalUI extends JFrame {
 
         centre.add(centreCentre, BorderLayout.CENTER);
 
-        fonctionnaireItem.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                repaintPanel(new EnrolementUI());
-            }
-        });
+//        fonctionnaireItem.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                repaintPanel(new EnrolementUI());
+//            }
+//        });
 
          regionItem.addActionListener(new ActionListener() {
              @Override
@@ -290,13 +310,32 @@ public class PrincipalUI extends JFrame {
             }
         });
 
-
         this.setVisible(true);
     }
 
     public void repaintPanel(JPanel panel) {
         currentPanel.removeAll();  // Retirer les composants actuels
-        currentPanel.add(panel, BorderLayout.CENTER);  // Ajouter EnrolementUI
+//        currentPanel.setOpaque(false); // Assurez-vous que le nouveau panneau est aussi transparent
+//        currentPanel.add(panel, BorderLayout.CENTER);
+//        currentPanel.revalidate();  // Revalider pour mettre à jour l'affichage
+//        currentPanel.repaint();
+
+        JPanel overlayPanel = new JPanel(new BorderLayout()) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                try {
+                    Image backgroundImage = ImageIO.read(new File("src/main/resources/biometrie_background_1.jpg"));
+                    g.drawImage(backgroundImage, 0, 0, getWidth(), getHeight(), this);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+
+        overlayPanel.add(panel, BorderLayout.CENTER); // Ajout du nouveau contenu par-dessus l'image de fond
+        currentPanel.add(overlayPanel, BorderLayout.CENTER);
+        currentPanel.setOpaque(false);
         currentPanel.revalidate();  // Revalider pour mettre à jour l'affichage
         currentPanel.repaint();
     }

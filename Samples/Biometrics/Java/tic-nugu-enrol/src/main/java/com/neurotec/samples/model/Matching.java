@@ -5,10 +5,10 @@
  ***********************************************************************/
 package com.neurotec.samples.model;
 
-import javax.persistence.*;
 
 import lombok.*;
 
+import javax.persistence.*;
 import java.util.*;
 
 @Getter

@@ -1,4 +1,5 @@
 package com.neurotec.samples.repository;
+
 import com.neurotec.samples.model.FingerImage;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

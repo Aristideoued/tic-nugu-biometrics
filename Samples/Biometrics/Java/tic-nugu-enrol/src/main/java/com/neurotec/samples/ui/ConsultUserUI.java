@@ -24,7 +24,6 @@ public class ConsultUserUI  extends JFrame {
     private JTable table;
     private DefaultTableModel tableModel;
     private JTextField searchField;
-//    private Connection connection;
     private TableRowSorter<DefaultTableModel> sorter;
     JButton modifyButton = new JButton("Modifier");
     JButton deleteButton = new JButton("Supprimer");
@@ -40,16 +39,16 @@ public class ConsultUserUI  extends JFrame {
     public ConsultUserUI(CompteService compteService) {
         this.compteService = compteService;
 
-        setTitle("Gestion des Informations depuis PostgreSQL");
-        setSize(600, 400);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setTitle("Gestion des comptes utilisateurs");
+        setSize(1500, 400);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(new BorderLayout());
 
         //.revalidate();
        // consultUserUI.repaint();
 
         // Colonnes du tableau
-      String[] columns = { "ID","Profil", "Username", "Matricule", "Nom", "Prenom", "Tel", "Email"};
+      String[] columns = { "ID","Profil", "Username", "Matricule", "Nom", "Prenom", "Tel", "Email", "Etat"};
         tableModel = new DefaultTableModel(columns, 0);
         tableModel.fireTableDataChanged();
         table = new JTable(tableModel);
@@ -110,57 +109,13 @@ public class ConsultUserUI  extends JFrame {
         buttonPanel.add(actdesacButton);
         buttonPanel.add(reinitialiser);
         annulerButton.addActionListener(e -> dispose()); // Fermer la fenêtre
-
+        reinitialiser.addActionListener(new reinitialisationMotDePasse());
 
         add(new JScrollPane(table), BorderLayout.CENTER);
         add(searchPanel, BorderLayout.NORTH);
         add(buttonPanel, BorderLayout.SOUTH);
-       // loadAll();
     }
 
-    // Charger les données depuis PostgreSQL
-  /*  private void loadDataFromDatabase() {
-        try {
-            String query = "SELECT compte.id as compte_id, utilisateur.id as utilisateur_id, username, matricule, nom, prenom, telephone, email " +
-                    "FROM compte JOIN utilisateur ON compte.uti_id = utilisateur.id;";
-            Statement stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-
-            while (rs.next()) {
-                int compteId = rs.getInt("compte_id");
-                int utilisateurId = rs.getInt("utilisateur_id");
-                String username = rs.getString("username");
-                String matricule = rs.getString("matricule");
-                String nom = rs.getString("nom");
-                String prenom = rs.getString("prenom");
-                String tel = rs.getString("telephone");
-                String email = rs.getString("email");
-
-                tableModel.addRow(new Object[]{compteId, utilisateurId, username, matricule, nom, prenom, tel, email});
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }*/
-
-
-    /*public void loadAll(){
-        String[] columns = {"ID Compte", "ID Utilisateur", "Username", "Matricule", "Nom", "Prenom", "Tel", "Email"};
-        tableModel = new DefaultTableModel(columns, 0);
-        table = new JTable(tableModel);
-        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
-        // Appliquer un TableRowSorter pour permettre le filtrage
-        sorter = new TableRowSorter<>(tableModel);
-        table.setRowSorter(sorter);
-        List<Compte> compteAll=utilisateurController.loadAll();
-
-        for(Compte compte : compteAll){
-            tableModel.addRow(new Object[]{compte.getId(), compte.getUtilisateur().getId(), compte.getUsername(), compte.getUtilisateur().getMatricule(), compte.getUtilisateur().getNom(), compte.getUtilisateur().getPrenom(), compte.getUtilisateur().getTelephone(), compte.getUtilisateur().getEmail()});
-
-        }
-    }*/
     public void refreshTable() {
         // Effacer les anciennes données du modèle de la table
         tableModel.setRowCount(0);
@@ -168,7 +123,11 @@ public class ConsultUserUI  extends JFrame {
         // Recharger toutes les données depuis la base de données
         List<Compte> compteAll = compteService.findAllCompte();
         for (Compte compte : compteAll) {
-            tableModel.addRow(new Object[]{compte.getId(), compte.getProfil().getLibelle(), compte.getUsername(), compte.getUtilisateur().getMatricule(), compte.getUtilisateur().getNom(), compte.getUtilisateur().getPrenom(), compte.getUtilisateur().getTelephone(), compte.getUtilisateur().getEmail()});
+            String profilLibelle = (compte.getProfil() != null)
+                    ? compte.getProfil().getLibelle()
+                    : "Profil non attribué";
+            String etat = compte.isFlActivated() ? "actif" : "inactif";
+            tableModel.addRow(new Object[]{compte.getId(), profilLibelle, compte.getUsername(), compte.getUtilisateur().getMatricule(), compte.getUtilisateur().getNom(), compte.getUtilisateur().getPrenom(), compte.getUtilisateur().getTelephone(), compte.getUtilisateur().getEmail(), etat});
         }
     }
     public void loadAll(){
@@ -278,10 +237,6 @@ public class ConsultUserUI  extends JFrame {
     Compte compte1=compteService.update(compte);
     //mise a jour de utilisateur
 
-
-
-
-
     }
 
     // Listener pour la suppression
@@ -291,11 +246,24 @@ public class ConsultUserUI  extends JFrame {
             int selectedRow = table.getSelectedRow();
             if (selectedRow != -1) {
                 Long compteId = (Long) tableModel.getValueAt(table.convertRowIndexToModel(selectedRow), 0);
-               // int utilisateurId = (int) tableModel.getValueAt(table.convertRowIndexToModel(selectedRow), 1);
-               // deleteFromDatabase(compteId, utilisateurId);
-                //Long longTen = Long. valueOf(compteId);
-                supprimer(compteId);
-                tableModel.removeRow(table.convertRowIndexToModel(selectedRow));
+
+                // Afficher un message de confirmation
+                int confirmation = JOptionPane.showConfirmDialog(
+                        null,
+                        "Êtes-vous sûr de vouloir supprimer cet élément?",
+                        "Confirmation de suppression",
+                        JOptionPane.YES_NO_OPTION
+                );
+
+                if (confirmation == JOptionPane.YES_OPTION) {
+                    // Si l'utilisateur confirme, on procède à la suppression
+                    supprimer(compteId);
+                    tableModel.removeRow(table.convertRowIndexToModel(selectedRow));
+                    JOptionPane.showMessageDialog(null, "Suppression effectuée avec succès.");
+                } else {
+                    // Sinon, on n'effectue pas la suppression
+                    JOptionPane.showMessageDialog(null, "Suppression annulée.");
+                }
             } else {
                 JOptionPane.showMessageDialog(null, "Veuillez sélectionner une ligne à supprimer.");
             }
@@ -333,12 +301,14 @@ public class ConsultUserUI  extends JFrame {
                      compte.setFlActivated(false);
                      compteService.update(compte);
                      JOptionPane.showMessageDialog(null, "Le compte a été désactiver.");
+                     refreshTable();
 
                  }else {
                      compte.setFlActivated(true);
                      compteService.update(compte);
                      JOptionPane.showMessageDialog(null, "Le compte a été activer.");
 
+                     refreshTable();
                  }
 
                 //supprimer(compteId);
@@ -350,4 +320,32 @@ public class ConsultUserUI  extends JFrame {
 
 
     }
+
+    // bouton de réinitialisation
+    private class reinitialisationMotDePasse implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            int selectedRow = table.getSelectedRow();
+            if (selectedRow != -1) {
+                Long compteId = (Long) tableModel.getValueAt(table.convertRowIndexToModel(selectedRow), 0);
+                Compte compte=compteService.findById(compteId);
+                boolean isInitialise= compteService.resetPassword(compteId);
+                if(isInitialise){
+                    JOptionPane.showMessageDialog(null, "Le mot de passe du compte a été rénitialisé avec succès.");
+
+                }else {
+                    JOptionPane.showMessageDialog(null, "Une erreur s'est passée!!!!!. Veuillre ressayer!!!");
+
+                }
+
+                //supprimer(compteId);
+                //tableModel.removeRow(table.convertRowIndexToModel(selectedRow));
+            } else {
+                JOptionPane.showMessageDialog(null, "Veuillez sélectionner une ligne à rénitialiser.");
+            }
+        }
+
+
+    }
+
 }

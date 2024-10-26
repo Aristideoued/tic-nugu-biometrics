@@ -1,5 +1,6 @@
 package com.neurotec.samples.repository;
 
+
 import com.neurotec.samples.model.Carte;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

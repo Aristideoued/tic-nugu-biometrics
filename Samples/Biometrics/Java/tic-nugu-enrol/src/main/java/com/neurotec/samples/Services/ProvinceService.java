@@ -1,6 +1,5 @@
 package com.neurotec.samples.Services;
 
-
 import com.neurotec.samples.model.Province;
 import com.neurotec.samples.model.Region;
 import org.springframework.data.domain.Page;

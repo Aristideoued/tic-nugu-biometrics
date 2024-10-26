@@ -5,7 +5,6 @@ import com.neurotec.samples.config.ChainCon;
 import com.neurotec.samples.model.Compte;
 import com.neurotec.samples.model.Profil;
 import com.neurotec.samples.model.Utilisateur;
-import com.neurotec.samples.swing.PrincipalUI;
 
 
 import javax.swing.*;
@@ -14,8 +13,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class CreationUtilisateurUI extends JFrame {

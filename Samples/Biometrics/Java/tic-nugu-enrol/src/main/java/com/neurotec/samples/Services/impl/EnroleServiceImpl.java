@@ -5,6 +5,7 @@ import com.neurotec.samples.Services.EnroleService;
 import com.neurotec.samples.model.Enrole;
 import com.neurotec.samples.repository.EnroleRepository;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

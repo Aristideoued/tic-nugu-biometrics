@@ -5,9 +5,9 @@
  ***********************************************************************/
 package com.neurotec.samples.model;
 
-import javax.persistence.*;
 import lombok.*;
 
+import javax.persistence.*;
 import java.sql.Blob;
 import java.util.*;
 
@@ -45,8 +45,7 @@ public class Enrole extends CommonEntity {
    private Integer nbrCarte;
    private Boolean fSynchronise;
    private Date dateSync;
-   @Lob
-   private Blob signature;
+   private byte[] signature;
 
    @OneToMany
    public java.util.Collection<FingerPrint> fingerPrint;
