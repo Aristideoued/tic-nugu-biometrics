@@ -131,6 +131,7 @@ public final class MainFrame extends JFrame implements ActionListener {
 	private JTabbedPane tabbedPane;
 
 	private JButton btnSartCapturing;
+	private JButton btnResset;
 
 	private HandSegmentSelector fingerSelector;
 	private FingersViewToolBar toolBar;
@@ -329,6 +330,76 @@ public final class MainFrame extends JFrame implements ActionListener {
 		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
 
 		JPanel capturingOptionsPanel = new JPanel();
+		capturingOptionsPanel.setPreferredSize(new Dimension(145, 200)); // Augmentez la hauteur
+		capturingOptionsPanel.setMaximumSize(new Dimension(145, 200)); // Augmentez la hauteur
+		capturingOptionsPanel.setBorder(BorderFactory.createTitledBorder(""));
+
+		GridBagLayout capturingOptionsLayout = new GridBagLayout();
+		capturingOptionsLayout.columnWidths = new int[] {30, 90};
+		capturingOptionsLayout.rowHeights = new int[] {30, 30, 30, 50, 50}; // Augmentez les hauteurs des lignes
+		capturingOptionsPanel.setLayout(capturingOptionsLayout);
+
+		chkPlainFingers = new JCheckBox("Un doigt");
+		chkPlainFingers.addActionListener(this);
+
+		chkSlaps = new JCheckBox("Tous les doigts");
+		chkSlaps.addActionListener(this);
+
+		chkRolledFingers = new JCheckBox("Capturer doigts enrollés");
+		chkRolledFingers.addActionListener(this);
+
+		btnSartCapturing = new JButton("Commencer");
+		btnSartCapturing.setBackground(Color.BLUE);
+		btnSartCapturing.setForeground(Color.WHITE);
+		btnSartCapturing.setSize(150, 50);
+		btnSartCapturing.setFont(new Font("Arial", Font.BOLD, 14));
+		btnSartCapturing.addActionListener(this);
+
+		btnResset = new JButton("Reinitialiser");
+		btnResset.setBackground(Color.red);
+		btnResset.setForeground(Color.WHITE);
+		btnResset.setSize(150, 50);
+		btnResset.setFont(new Font("Arial", Font.BOLD, 14));
+		btnResset.addActionListener(this);
+
+		GridBagUtils gridBagUtils = new GridBagUtils(GridBagConstraints.VERTICAL);
+		gridBagUtils.setInsets(new Insets(5, 2, 5, 0)); // Ajustez les marges pour chaque bouton
+
+		gridBagUtils.addToGridBagLayout(0, 0, 2, 1, capturingOptionsPanel, chkPlainFingers);
+		gridBagUtils.addToGridBagLayout(1, 1, 1, 1, capturingOptionsPanel, chkSlaps);
+		gridBagUtils.addToGridBagLayout(0, 2, 2, 1, capturingOptionsPanel, chkRolledFingers);
+		gridBagUtils.addToGridBagLayout(0, 3, capturingOptionsPanel, btnSartCapturing);
+		gridBagUtils.addToGridBagLayout(0, 4, capturingOptionsPanel, btnResset); // Ajout de btnReset ici
+
+		fingerSelectorPanel = new JPanel();
+		fingerSelectorPanel.setPreferredSize(new Dimension(246, 135));
+		fingerSelectorPanel.setMaximumSize(new Dimension(246, 135));
+		fingerSelectorPanel.setBorder(BorderFactory.createTitledBorder("Cliquer sur les doigts manquants"));
+		fingerSelectorPanel.setLayout(new BorderLayout());
+
+		fingerSelector = new HandSegmentSelector();
+		fingerSelector.setPreferredSize(new Dimension(275, 130));
+		fingerSelector.setScenario(Scenario.ALL_PLAIN_FINGERS);
+		fingerSelector.clearSelection();
+
+		fingerSelectorPanel.add(fingerSelector, BorderLayout.CENTER);
+
+		topPanel.add(capturingOptionsPanel);
+		topPanel.add(Box.createHorizontalStrut(4));
+		topPanel.add(fingerSelectorPanel);
+		topPanel.add(Box.createGlue());
+
+		return topPanel;
+	}
+
+
+
+
+	private JPanel createTopPanel1() {
+		JPanel topPanel = new JPanel();
+		topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.X_AXIS));
+
+		JPanel capturingOptionsPanel = new JPanel();
 		capturingOptionsPanel.setPreferredSize(new Dimension(145, 135));
 		capturingOptionsPanel.setMaximumSize(new Dimension(145, 135));
 		capturingOptionsPanel.setBorder(BorderFactory.createTitledBorder(""));
@@ -357,7 +428,22 @@ public final class MainFrame extends JFrame implements ActionListener {
 
 
 
+
+
+
+
 		btnSartCapturing.addActionListener(this);
+
+		btnResset = new JButton("Reinitialiser");
+		btnResset.setBackground(Color.GREEN); // Définit la couleur de fond en bleu
+		btnResset.setForeground(Color.WHITE); // Définit la couleur du texte en blanc
+		btnResset.setSize(150,50);
+
+// Optionnel : Pour s'assurer que le texte reste lisible, vous pouvez également définir la police.
+		btnResset.setFont(new Font("Arial", Font.BOLD, 14));
+		btnResset.addActionListener(this);
+
+
 
 
 		GridBagUtils gridBagUtils = new GridBagUtils(GridBagConstraints.VERTICAL);
@@ -367,6 +453,16 @@ public final class MainFrame extends JFrame implements ActionListener {
 		gridBagUtils.addToGridBagLayout(1, 1, 1, 1, capturingOptionsPanel, chkSlaps);
 		gridBagUtils.addToGridBagLayout(0, 2, 2, 1, capturingOptionsPanel, chkRolledFingers);
 		gridBagUtils.addToGridBagLayout(0, 3, capturingOptionsPanel, btnSartCapturing);
+
+
+
+		/*GridBagUtils gridBagUtils2 = new GridBagUtils(GridBagConstraints.VERTICAL);
+		gridBagUtils2.setInsets(new Insets(4, 2, 2, 0));
+
+		gridBagUtils2.addToGridBagLayout(0, 0, 2, 1, capturingOptionsPanel, chkPlainFingers);
+		gridBagUtils2.addToGridBagLayout(1, 1, 1, 1, capturingOptionsPanel, chkSlaps);
+		gridBagUtils2.addToGridBagLayout(0, 2, 2, 1, capturingOptionsPanel, chkRolledFingers);
+		gridBagUtils2.addToGridBagLayout(0, 3, capturingOptionsPanel, btnResset);*/
 
 		fingerSelectorPanel = new JPanel();
 		fingerSelectorPanel.setPreferredSize(new Dimension(246, 135));
@@ -766,7 +862,11 @@ public final class MainFrame extends JFrame implements ActionListener {
 			AboutBox.show();
 		} else if (source == btnSartCapturing) {
 			startCapturing();
-		} else if (source == chkPlainFingers || source == chkSlaps || source == chkRolledFingers) {
+		}
+		else if (source == btnResset) {
+			startNewEnrollment();
+		}
+		else if (source == chkPlainFingers || source == chkSlaps || source == chkRolledFingers) {
 			changeCapturingOptions(source);
 		}
 	}
