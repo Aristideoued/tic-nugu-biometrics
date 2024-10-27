@@ -67,6 +67,7 @@ dependencies {
 	implementation 'name.prokop.bart.rxtx:rxtx:2.2.2'
 	//implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
 	compileOnly 'org.projectlombok:lombok:1.18.28'
+	implementation group: 'com.machinezoo.sourceafis', name: 'sourceafis', version: '3.13.0'
 	annotationProcessor 'org.projectlombok:lombok:1.18.28'
 }
 
